@@ -21,8 +21,8 @@ if (data.length==2){window.location.href=urls[data[1]];}
 - 可解除存储/应用限制策略<br/>
 - 总结：是各种情况下的首选 功能强大但部分功能不易用 可误操作空间小<br/>
 <br/>
-JiYu Trainer：<https://frez79.site?jyt><br/>
-JiYu Trainer (forXP)：<https://frez79.site?jyt4xp><br/>
+JiYu Trainer：<https://frez79.site?jyt> <br/>
+JiYu Trainer (forXP)：<https://frez79.site?jyt4xp> br/>
 - 仓库github@imengyu/JiYuTrainer(archive于21.12.03) 针对极域开发<br/>
 - 支持学生端启停/卸载与广播窗口化 支持反监视/反控制<br/>
 - 可模拟基于UDP的部分极域教师端控制操作<br/>
