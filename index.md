@@ -9,6 +9,7 @@ urls={
 data=window.location.href.split("?")
 if (data.length==2){window.location.href=urls[data[1]];}
 </script>
+<p>
 提取码：`gxxk`<br/>
 主页面：<https://ouyhq.lanzouv.com/b0w84ycpg><br/>
 点击名称可以访问此项目官网 冒号后的内容一般为快速下载/跳转<br/>
@@ -31,3 +32,4 @@ JiYu Trainer (forXP)：<https://frez79.site?jyt4xp><br/>
 7-zip(32bit)：<https://7z.frez79.site><br/>
 &#9;高性能解压缩工具 冲浪必备<br/>
 &#9;64bit在文件夹内也有<br/>
+</p>
