@@ -14,20 +14,20 @@ if (data.length==2){window.location.href=urls[data[1]];}
 点击名称可以访问此项目官网 冒号后的内容一般为快速下载/跳转<br/>
 <br/>
 [My Computer Class](https://gitee.com/wojiaoyishang/my-computer-class/releases)：<https://frez79.site?mcc><br/>
-    由yishang大佬开发 支持极域/红蜘蛛<br/>
-    支持学生端关闭/挂起与窗口操作 可自我进程保护(需安装驱动)<br/>
-    可模拟基于UDP的部分极域教师端控制操作<br/>
-    可解除存储/应用限制策略<br/>
-    总结：是各种情况下的首选 功能强大但部分功能不易用 可误操作空间小<br/>
+&#9;由yishang大佬开发 支持极域/红蜘蛛<br/>
+&#9;支持学生端关闭/挂起与窗口操作 可自我进程保护(需安装驱动)<br/>
+&#9;可模拟基于UDP的部分极域教师端控制操作<br/>
+&#9;可解除存储/应用限制策略<br/>
+&#9;总结：是各种情况下的首选 功能强大但部分功能不易用 可误操作空间小<br/>
 <br/>
 JiYu Trainer：<https://frez79.site?jyt><br/>
 JiYu Trainer (forXP)：<https://frez79.site?jyt4xp><br/>
-    仓库github@imengyu/JiYuTrainer(archive于21.12.03) 针对极域开发<br/>
-    支持学生端启停/卸载与广播窗口化 支持反监视/反控制<br/>
-    可模拟基于UDP的部分极域教师端控制操作<br/>
-    可解除网络访问限制策略<br/>
-    总结：极域首选 操作简单 可误操作空间大 官方文档很有用<br/>
+&#9;仓库github@imengyu/JiYuTrainer(archive于21.12.03) 针对极域开发<br/>
+&#9;支持学生端启停/卸载与广播窗口化 支持反监视/反控制<br/>
+&#9;可模拟基于UDP的部分极域教师端控制操作<br/>
+&#9;可解除网络访问限制策略<br/>
+&#9;总结：极域首选 操作简单 可误操作空间大 官方文档很有用<br/>
 <br/>
 7-zip(32bit)：<https://7z.frez79.site><br/>
-    高性能解压缩工具 冲浪必备<br/>
-    64bit在文件夹内也有<br/>
+&#9;高性能解压缩工具 冲浪必备<br/>
+&#9;64bit在文件夹内也有<br/>
