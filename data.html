@@ -1,0 +1,30 @@
+<!-- Gxxk的私密内容 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+<script>
+function encrypt(text,key){return CryptoJS.AES.encrypt(text, key).toString();}
+
+// 定义解密函数
+function decrypt(ciphertext,key) {
+    var bytes = CryptoJS.AES.decrypt(ciphertext, key);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
+}
+
+// 加密文本
+var encryptedText = 'U2FsdGVkX1+FRwCL9sxbgpkrByoO95KXptlLqoad/s/u8JlWui7fna6WPKRIUHpN'; // My ZT ID
+
+// 检查密码并解密
+function checkPassword() {
+    var password = prompt("Please enter the password:");
+    var decryptedText = decrypt(encryptedText, password);
+    document.getElementById("encryptedContent").innerText = decryptedText;
+    document.getElementById("encryptedContent").style.display = "block";
+}
+</script>
+
+<h1>解密结果↓</h1>
+<button onclick="checkPassword()">输入密码</button>
+
+<div id="encryptedContent" style="display:none;">
+    <!-- Encrypted content will be displayed here -->
+</div>
