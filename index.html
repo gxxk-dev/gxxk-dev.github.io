@@ -38,11 +38,6 @@
     }
 </style>
 <script>
-    function delay(milliseconds){
-        return new Promise(resolve => {
-            setTimeout(resolve, milliseconds);
-        });
-    }
     const urls = {
         "mcc": "https://ouyhq.lanzouv.com/iiZX529fpxni",  // MyComputerClass v3.4.0
         "jyt": "https://ouyhq.lanzouv.com/iPPqr29fuvra",  // JiYuTrainer v1.7.6
@@ -60,6 +55,11 @@
         "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
         "bms": "https://bemuse.ninja/"  // Bemuse
     };
+    try {
+        data = window.location.href.split("?"), 2 == data.length && (window.location.href = urls[data[1]])
+    } catch {
+        alert("没有与此ID对应的URL!")
+    }
     function A(url){
         return `<a href="${url}">${url}</a>`
     }
