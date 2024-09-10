@@ -1,35 +1,34 @@
 <title>机房摸鱼之盾</title>
 <style>
-
     :root {
-        --padding-base: 8px; /* 定义基础边距值 */
+        --min-padding: 8px; /* 定义最小边距值 */
     }
-
 
     body {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #1e1e1e;
-        background-color: #1e1e1e;
         color: #dcdcdc;
-        padding: 0 calc(20 * var(--padding-base)); /* 使用倍数关系设置边距 */
+        box-sizing: border-box;
+        padding: calc(var(--min-padding) + 1vw) 0; /* 应用垂直边距 */
     }
 
     #centered-content {
-        max-width: 960px;
+        max-width: calc(100vw - 2 * var(--min-padding)); /* 减去两侧最小边距的两倍 */
         width: 100%;
         background: #282828;
         box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
-        padding: var(--padding-base);
+        padding: 20px;
         color: #bcbcbc;
         font-size: 16px;
         line-height: 1.6;
-        margin: auto; /* 使内容在页面中居中显示 */
+        box-sizing: border-box;
+        width: fit-content; /* 使用 fit-content 以适应内容的实际宽度 */
+        margin: auto; /* 居中显示 */
     }
 
     a {
@@ -42,18 +41,42 @@
         color: #5aaafa
     }
 
-    h3 {
-        margin-top: 1%;
-        margin-bottom: 1%;
+    /* 为所有标题元素增加醒目样式 */
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff; /* 设置文本颜色为白色，确保在深色背景上醒目 */
+        font-weight: bold; /* 字体加粗 */
+        text-shadow: 1px 1px 2px #000; /* 添加轻微的文字阴影，增强立体感 */
+        margin-top: 8px; /* 增加顶部边距 */
+        margin-bottom: 8px; /* 增加底部边距 */
     }
 
+    h2 {
+        border-bottom: 2px solid #5a5a5a; /* h2 标题下方添加一条细线 */
+        padding-bottom: 5px; /* 增加底部内边距 */
+    }
 
-    #search-container {
-        position: absolute;
-        right: 20px;
-        top: 20px;
+    /* 为链接样式增加变化，如果标题中包含链接 */
+    h1 a, h2 a, h3 a {
+        color: #ffffff; /* 链接颜色 */
+        text-decoration: none; /* 去除下划线 */
+        transition: color 0.3s; /* 颜色变化的过渡效果 */
+    }
+
+    h1 a:hover, h2 a:hover, h3 a:hover {
+        color: #cccccc; /* 鼠标悬停时的链接颜色 */
+    }
+
+    .flex-container {
         display: flex;
+        gap: 10px;
         align-items: center;
+        position: fixed; /* 确保这一行没有被覆盖 */
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 8px 16px;
+        border-radius: 8px;
     }
 
     #search-box {
@@ -90,7 +113,69 @@
     details > :not(summary) {
         padding-left: 20px; /* 添加缩进 */
     }
-</style>
+
+
+    /* 为 summary 元素调整尺寸 */
+    summary {
+        font-size: 0.875em; /* 减小字体大小 */
+        padding: 6px 12px; /* 减小内边距 */
+        border-radius: 3px; /* 减小圆角边框的大小 */
+    }
+
+    /* 为 details 元素调整尺寸 */
+    details {
+        padding: 8px 16px; /* 减小内边距 */
+        border-radius: 6px; /* 减小圆角边框的大小 */
+    }
+
+    /* 为 details 元素中的内容调整尺寸 */
+    details p, details ul, details ol {
+        font-size: 0.875em; /* 减小内容的字体大小 */
+        line-height: 1.4; /* 减小行高 */
+    }
+
+    /* 为 details 内嵌套的 details 元素调整尺寸 */
+    details details {
+        padding: 6px 12px; /* 减小内边距 */
+        border-radius: 4px; /* 减小圆角边框的大小 */
+    }
+
+    .hidden {
+        display: none;
+    }
+
+
+    code {
+        background-color: #373737; /* 另一种深色背景 */
+        color: #ffffff; /* 白色文本，高对比度 */
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        border: 1px solid #505050; /* 边框颜色 */
+    }
+
+    summary {
+        background-color: #373737; /* 深色背景，与页面主题协调 */
+        color: #ffffff; /* 明亮的文本颜色，提高可见性 */
+        padding: 10px 20px; /* 增加内边距，使点击区域更大 */
+        border-radius: 5px; /* 轻微的圆角边框 */
+        border: 1px solid #444444; /* 轻微的边框 */
+        font-weight: bold; /* 加粗字体 */
+        cursor: pointer; /* 显示指针光标，表明这是可点击的 */
+        transition: background-color 0.3s, color 0.3s; /* 过渡效果，使变化更平滑 */
+    }
+
+    summary:hover {
+        background-color: #4a4a4a; /* 鼠标悬停时的背景颜色变化 */
+        color: #ffffff; /* 保持文本颜色明亮 */
+    }
+
+    details[open] summary {
+        background-color: #4a4a4a; /* 展开状态的背景颜色 */
+        border-bottom: 1px solid #5a5a5a; /* 展开时底部边框颜色变化 */
+    }
+
+</style> <!-- CSS用KimiAI写的 有点奇奇怪怪的隐性Bug 等以后系统的学了CSS以后来修一修 -->
 <script>
     const urls = {
         "mcc": "https://ouyhq.lanzouv.com/iiZX529fpxni",  // MyComputerClass v3.4.0
@@ -110,7 +195,8 @@
         "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
         "bms": "https://bemuse.ninja/"  // Bemuse
     };
-    try {
+    
+    try { // 自动跳转功能
         param=window.location.href.split("?")[1]
         data = urls[param]
         if (data!=undefined){
@@ -119,10 +205,11 @@
             alert(`来来来你说说这个${window.location.href.split("?")[1]}是哪个软件的ID\n(未找到此ID对应的软件分流下载URL)`)
         }
     } catch {}
-    function A(url){
+
+    function A(url){ // 快速插入URL
         return `<a href="${url}">${url}</a>`
     }
-    const index = {
+    const index = { // 软件索引 包含标题与介绍
         "mcc": { // My Computer Class
             "title":[
                 `mcc|MyComputerClass v3.4.0: ${A(urls["mcc"])}`,
@@ -161,7 +248,7 @@
         },
         "cfwp": { // CFWorker-HTTPProxy
             "title":[
-                `cfwp|CFWorker HTTP Proxy(x86):${A(urls["cfwp"])}`,
+                `cfwp|CFWorker HTTP Proxy:${A(urls["cfwp"])}`,
             ],
             "desc":[
                 "基于Cloudflare Workers搭建的HTTP代理服务",
@@ -220,37 +307,8 @@
             ]
         }   
     }
-    document.addEventListener("DOMContentLoaded", function() {
-        const projectDivContent = document.getElementById('projects');
 
-        // 遍历 descriptions 字典，为每个项目创建内容
-        for (const key in index) {
-            const project = index[key];
-
-            // 创建标题
-            const titleDiv = document.createElement('div');
-            project.title.forEach(titleText => {
-                const title = document.createElement('h3');
-                title.innerHTML = titleText;
-                titleDiv.appendChild(title);
-            });
-            projectDivContent.appendChild(titleDiv);
-            // 创建描述列表
-            const descList = document.createElement('ul');
-            project.desc.forEach(desc => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = desc;
-                descList.appendChild(listItem);
-            });
-            projectDivContent.appendChild(descList);
-            // 添加分隔线
-            const hr = document.createElement('hr');
-            projectDivContent.appendChild(hr);
-        }
-    });
-
-
-    function searchContent() {
+    function LoadContentBySearchText() { // 是search 也是load
         const searchBox = document.getElementById('search-box');
         const query = searchBox.value.toLowerCase();
         const results = Object.keys(index).filter(key => {
@@ -276,34 +334,49 @@
                 titleDiv.appendChild(title);
             });
             projectDivContent.appendChild(titleDiv);
+            // 创建描述列表
             const descList = document.createElement('ul');
             project.desc.forEach(desc => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = desc;
+                listItem.className = 'searchable-desc'; // 添加类名用于后续操作
                 descList.appendChild(listItem);
             });
             projectDivContent.appendChild(descList);
+            // 添加分隔线
             const hr = document.createElement('hr');
             projectDivContent.appendChild(hr);
         });
     }
+
+    document.addEventListener("DOMContentLoaded", LoadContentBySearchText);
+
+    function ToggleTitlesView() { // 标题/详细 视图切换
+        var descElements = document.querySelectorAll('.searchable-desc');
+        descElements.forEach(function(element) {
+            element.classList.toggle('hidden');
+        });
+        // 切换按钮的文字
+        var toggleTitlesButton = document.getElementById('toggle-titles');
+        toggleTitlesButton.textContent = descElements[0].classList.contains('hidden') ? "详细视图" : "标题视图";
+    }
 </script>
 
-<div id="search-container">
+<div id="search-container" class="flex-container">
     <input type="text" id="search-box" placeholder="搜索摸鱼工具... (留空以全部展示)">
     <button onclick="searchContent()">搜索</button>
+    <button id="toggle-titles" onclick="ToggleTitlesView()">标题视图</button>
 </div>
 
 
 <div id="centered-content">
     <h1><a href="./">机房摸鱼之盾</a></h1>
     <hr />
-    
     资源收录/纠错联系：<a href="mailto:gxxk@duck.com">gxxk@duck.com (点我发送)</a> <br/>
     本站网页(与网页源代码)以 <a href="https://www.gnu.org/licenses/agpl.txt">AGPL v3+</a>协议 开源在 <a href="https://github.com/gxxk-dev/gxxk-dev.github.io">Gxxk的Github个人仓库</a> 下 <br />
     网盘主页面：<a href="https://ouyhq.lanzouv.com/b0w84ycpg">https://ouyhq.lanzouv.com/b0w84ycpg</a> 提取码：gxxk<br>
-    点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流/对应资源<br />
-    Tip:本站具有快速跳转功能，在URL后加上一个问号和一个ID即可快速跳转到下载页<br/>
+    点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流下载页面/对应资源<br />
+    本站建议以宽屏视图浏览<br />
     <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
     <details>
         <summary>关于本站的网络线路信息</summary><p>
@@ -321,7 +394,25 @@
         但本站的 工具内容 展示部分的内容存储在网页JSON内 当页面加载完成后才开始加载这一部分<br/>
         <del>有效防止搜索引擎收录本页面</del><br/>
         不过这么做方便管理，免去了排版的麻烦<br/>
-        <del>毕竟这个页面是某人手撸出来的 并且只是为了炫技而已...</del></p>
+        <del>毕竟这个页面是某人手撸(CSS By Kimi)出来的 并且只是为了炫技而已...</del>
+        <br/>
+        不过本站起初做的时候，项目内容直接写进了HTML内，
+        <del>结果后面看冗余的HTML越看越不顺眼 顺手改成动态加载了</del></p>
+    </details>
+
+    <details>
+        <summary>关于本站的快速跳转功能</summary><p>
+        为了更方便/快速的下载反控软件 本站提供了快速跳转功能 格式如下：<br/>
+        <code>[站点URL]?[软件ID]</code><br/>
+        例如您正以<code>v.frez79.site</code>访问本页面并想快速跳转到<strong>My Computer Class(ID:mcc)</strong>的网盘分流下载页面：<br/>
+        &nbsp;&nbsp;<code>v.frez79.site?mcc</code><br/>
+        或者您正以<code>frez79.site</code>访问本页面并想快速跳转到<strong>MythwareToolkit(ID:mt)</strong>的网盘分流下载页面：<br/>
+        &nbsp;&nbsp;<code>frez79.site?mt</code><br/>
+        <br/>
+        ID位于标题起始处至字符<code>|</code>处，例如<code>CFWorker HTTP Proxy</code>的标题如下所示：<br/>
+        <code>cfwp|CFWorker HTTP Proxy(x86):https://proxy.frez79.site/</code><br/>
+        则开头的<code>cfwp</code>就是ID
+        </p>
     </details>
     <noscript>本站点的页面主内容加载需要JavaScript!</noscript>
     <hr />
