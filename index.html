@@ -1,5 +1,11 @@
 <title>机房摸鱼之盾</title>
 <style>
+
+    :root {
+        --padding-base: 8px; /* 定义基础边距值 */
+    }
+
+
     body {
         display: flex;
         flex-direction: column;
@@ -9,7 +15,21 @@
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #1e1e1e;
-        color: #dcdcdc
+        background-color: #1e1e1e;
+        color: #dcdcdc;
+        padding: 0 calc(20 * var(--padding-base)); /* 使用倍数关系设置边距 */
+    }
+
+    #centered-content {
+        max-width: 960px;
+        width: 100%;
+        background: #282828;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+        padding: var(--padding-base);
+        color: #bcbcbc;
+        font-size: 16px;
+        line-height: 1.6;
+        margin: auto; /* 使内容在页面中居中显示 */
     }
 
     a {
@@ -22,20 +42,53 @@
         color: #5aaafa
     }
 
-    .centered-content {
-        max-width: 960px;
-        width: 100%;
-        background: #282828;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
-        padding: 20px;
-        color: #bcbcbc;
-        font-size: 16px;
-        line-height: 1.6
-    }
-
     h3 {
         margin-top: 1%;
         margin-bottom: 1%;
+    }
+
+
+    #search-container {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    #search-box {
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #dcdcdc;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #bcbcbc;
+        background-color: #282828;
+        width: 260px;
+    }
+
+    #search-box:focus {
+        outline: none;
+        border-color: #5aaafa;
+    }
+
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4078c0;
+        color: #dcdcdc;
+        cursor: pointer;
+        transition: background-color .3s;
+    }
+
+    button:hover {
+        background-color: #5aaafa;
+    }
+
+    /* 为 details 标签内除 summary 外的子元素添加缩进 */
+    details > :not(summary) {
+        padding-left: 20px; /* 添加缩进 */
     }
 </style>
 <script>
@@ -58,10 +111,14 @@
         "bms": "https://bemuse.ninja/"  // Bemuse
     };
     try {
-        data = window.location.href.split("?"), 2 == data.length && (window.location.href = urls[data[1]])
-    } catch {
-        alert("没有与此ID对应的URL!")
-    }
+        param=window.location.href.split("?")[1]
+        data = urls[param]
+        if (data!=undefined){
+            window.location.href = data;
+        }else if (param!=undefined){
+            alert(`来来来你说说这个${window.location.href.split("?")[1]}是哪个软件的ID\n(未找到此ID对应的软件分流下载URL)`)
+        }
+    } catch {}
     function A(url){
         return `<a href="${url}">${url}</a>`
     }
@@ -164,7 +221,7 @@
         }   
     }
     document.addEventListener("DOMContentLoaded", function() {
-        const centeredContent = document.getElementById('centered-content');
+        const projectDivContent = document.getElementById('projects');
 
         // 遍历 descriptions 字典，为每个项目创建内容
         for (const key in index) {
@@ -177,7 +234,7 @@
                 title.innerHTML = titleText;
                 titleDiv.appendChild(title);
             });
-            centeredContent.appendChild(titleDiv);
+            projectDivContent.appendChild(titleDiv);
             // 创建描述列表
             const descList = document.createElement('ul');
             project.desc.forEach(desc => {
@@ -185,17 +242,63 @@
                 listItem.innerHTML = desc;
                 descList.appendChild(listItem);
             });
-            centeredContent.appendChild(descList);
+            projectDivContent.appendChild(descList);
             // 添加分隔线
             const hr = document.createElement('hr');
-            centeredContent.appendChild(hr);
+            projectDivContent.appendChild(hr);
         }
     });
+
+
+    function searchContent() {
+        const searchBox = document.getElementById('search-box');
+        const query = searchBox.value.toLowerCase();
+        const results = Object.keys(index).filter(key => {
+            const project = index[key];
+            // 处理标题，移除冒号后的内容
+            const processedTitles = project.title.map(title => {
+                return title.toLowerCase().split(':')[0];
+            });
+            return processedTitles.some(processedTitle => processedTitle.includes(query)) ||
+                   project.desc.some(desc => desc.toLowerCase().includes(query));
+        });
+
+        const projectDivContent = document.getElementById('projects');
+        projectDivContent.innerHTML = ''; // 清空现有内容
+
+        // 显示搜索结果
+        results.forEach(key => {
+            const project = index[key];
+            const titleDiv = document.createElement('div');
+            project.title.forEach(titleText => {
+                const title = document.createElement('h3');
+                title.innerHTML = titleText;
+                titleDiv.appendChild(title);
+            });
+            projectDivContent.appendChild(titleDiv);
+            const descList = document.createElement('ul');
+            project.desc.forEach(desc => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = desc;
+                descList.appendChild(listItem);
+            });
+            projectDivContent.appendChild(descList);
+            const hr = document.createElement('hr');
+            projectDivContent.appendChild(hr);
+        });
+    }
 </script>
+
+<div id="search-container">
+    <input type="text" id="search-box" placeholder="搜索摸鱼工具... (留空以全部展示)">
+    <button onclick="searchContent()">搜索</button>
+</div>
+
 
 <div id="centered-content">
     <h1><a href="./">机房摸鱼之盾</a></h1>
     <hr />
+    
     资源收录/纠错联系：<a href="mailto:gxxk@duck.com">gxxk@duck.com (点我发送)</a> <br/>
     本站网页(与网页源代码)以 <a href="https://www.gnu.org/licenses/agpl.txt">AGPL v3+</a>协议 开源在 <a href="https://github.com/gxxk-dev/gxxk-dev.github.io">Gxxk的Github个人仓库</a> 下 <br />
     网盘主页面：<a href="https://ouyhq.lanzouv.com/b0w84ycpg">https://ouyhq.lanzouv.com/b0w84ycpg</a> 提取码：gxxk<br>
@@ -203,23 +306,27 @@
     Tip:本站具有快速跳转功能，在URL后加上一个问号和一个ID即可快速跳转到下载页<br/>
     <div style="color: #1e1e1e;font-size:1%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
     <details>
-        <summary>关于本站的网络线路信息</summary>
+        <summary>关于本站的网络线路信息</summary><p>
         本站同时部署了 3个静态页面托管服务，分别为：
         <ol>
             <li><a href="https://frez79.site/">GithubPages</a>（速度与CF不相上下）</li>
             <li><a href="https://cf.frez79.site/">Cloudflare Pages</a>（概率出现的人机验证会拖慢下载反控软件的时间）</li>
             <li><a href="https://v.frez79.site/">Vercel</a>（速度最快但被墙几率大）</li>
         </ol>
-        （三者均有几率被墙 请根据自己所在学校机房的网络情况选择使用）<br/>
+        （三者均有几率被墙 请根据自己所在学校机房的网络情况选择使用）<br/></p>
     </details>
     <details>
-        <summary>[碎碎念]关于本站的站点架构信息</summary>
+        <summary>[碎碎念]关于本站的站点架构信息</summary><p>
         站点架构其实就是纯静态 <del>毕竟你也看得到嘛</del> <br/>
         但本站的 工具内容 展示部分的内容存储在网页JSON内 当页面加载完成后才开始加载这一部分<br/>
         <del>有效防止搜索引擎收录本页面</del><br/>
         不过这么做方便管理，免去了排版的麻烦<br/>
-        <del>毕竟这个页面是某人手撸出来的 并且只是为了炫技而已...</del>
+        <del>毕竟这个页面是某人手撸出来的 并且只是为了炫技而已...</del></p>
     </details>
     <noscript>本站点的页面主内容加载需要JavaScript!</noscript>
     <hr />
+
+    <div id="projects">
+        <!-- 软件展示区 -->
+    </div>
 </div>
