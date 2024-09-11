@@ -78,37 +78,7 @@
         padding: 8px 16px;
         border-radius: 8px;
     }
-
-    #search-box {
-        padding: 8px;
-        margin-right: 10px;
-        border: 1px solid #dcdcdc;
-        border-radius: 4px;
-        font-size: 16px;
-        color: #bcbcbc;
-        background-color: #282828;
-        width: 260px;
-    }
-
-    #search-box:focus {
-        outline: none;
-        border-color: #5aaafa;
-    }
-
-    button {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        background-color: #4078c0;
-        color: #dcdcdc;
-        cursor: pointer;
-        transition: background-color .3s;
-    }
-
-    button:hover {
-        background-color: #5aaafa;
-    }
-
+    
     /* 为 details 标签内除 summary 外的子元素添加缩进 */
     details > :not(summary) {
         padding-left: 20px; /* 添加缩进 */
@@ -175,6 +145,92 @@
         border-bottom: 1px solid #5a5a5a; /* 展开时底部边框颜色变化 */
     }
 
+    /* 选择器容器样式 */
+    #search-container {
+        backdrop-filter: blur(5px);
+        background-color: rgba(40,40,40, 0.2);
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 10px;
+        border-radius: 8px; /* 圆角边框 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 轻微的阴影效果 */
+    }
+
+    /* 选择器样式 */
+    #category-select, #filter-mode {
+        margin: 5px;
+        padding: 8px 16px;
+        font-size: 16px;
+        max-height: 70px;
+        color: #ffffff; /* 文本颜色 */
+        background-color: #373737; /* 背景颜色 */
+        border: none; /* 移除边框 */
+        outline: none; /* 移除焦点轮廓 */
+        border-radius: 4px; /* 圆角边框 */
+        cursor: pointer; /* 指针样式 */
+        transition: background-color 0.3s, box-shadow 0.3s; /* 过渡效果 */
+    }
+
+    /* 选择器在聚焦或被点击时的样式 */
+    #category-select:focus, #filter-mode:focus,
+    #category-select:active, #filter-mode:active {
+        background-color: #484848; /* 聚焦或点击时的背景颜色 */
+        box-shadow: 0 0 8px rgba(90, 170, 250, 0.5); /* 聚焦或点击时的阴影效果 */
+    }
+
+    /* 搜索框样式 */
+    #search-box {
+        padding: 8px;
+        border: 1px solid #dcdcdc;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #bcbcbc;
+        background-color: #282828;
+        margin: 5px;
+    }
+
+    /* 搜索框聚焦时的样式 */
+    #search-box:focus {
+        outline: none;
+        border-color: #5aaafa;
+    }
+
+    /* 按钮样式 */
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4078c0;
+        color: #dcdcdc;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 5px;
+    }
+
+    /* 按钮悬停时的样式 */
+    button:hover {
+        background-color: #5aaafa;
+    }
+
+    /* 为选择器添加独特的外观 */
+    #category-select, #filter-mode {
+        background-image: linear-gradient(to bottom, #3d3d3d, #282828);
+        border: 1px solid #5a5a5a;
+        box-shadow: inset 0 1px 0 #606060, 0 1px 2px #000;
+    }
+
+    #category-select:hover, #filter-mode:hover {
+        background-image: linear-gradient(to bottom, #454545, #303030);
+    }
+
+    #category-select:focus, #filter-mode:focus,
+    #category-select:active, #filter-mode:active {
+        box-shadow: 0 0 10px #7a7a7a, inset 0 1px 0 #606060;
+    }
+
 </style> <!-- CSS用KimiAI写的 有点奇奇怪怪的隐性Bug 等以后系统的学了CSS以后来修一修 -->
 <script>
     const urls = {
@@ -220,7 +276,8 @@
                 "可模拟基于UDP的部分极域教师端控制操作",
                 "可解除存储/应用限制策略",
                 "总结：大小3.7m，是各种情况下的首选，功能强大全面但部分功能对于小白来讲不易用，可误操作空间小"
-            ]
+            ],
+            "type":["tools","antiCtrl",]
         },
         "jyt": { // JiYu Trainer
             "title":[
@@ -235,6 +292,7 @@
                 "JYTP非原作者所作 但可过大部分免杀 XP兼容性未知",
                 "总结：大小4.5m，新手+极域首选，操作简单，功能较全，可误操作空间大，官方文档很有用",
             ],
+            "type":["tools","antiCtrl",]
         },
         "7z": { // 7-zip
             "title":[
@@ -244,7 +302,8 @@
             "desc":[
                 "高性能解压缩工具，支持多种压缩格式",
                 "轻量级，快速解压，冲浪必备",
-            ]
+            ],
+            "type":["tools",]
         },
         "cfwp": { // CFWorker-HTTPProxy
             "title":[
@@ -253,7 +312,8 @@
             "desc":[
                 "基于Cloudflare Workers搭建的HTTP代理服务",
                 "该Worker处于免费计费额度下 建议自行搭建"
-            ]
+            ],
+            "type":["tools","webpages",]
         },
         "mt": { // MythwareToolkit
             "title": [
@@ -267,7 +327,8 @@
                 "需要在属性-兼容性内勾选以管理员身份运行此程序",
                 "总结：不到1m大小，极域首选，操作简单，可误操作空间中等，涵盖了摸鱼必备的所有功能（除教师端UDP控制模拟）",
                 "64bit在文件夹内也有"
-            ]
+            ],
+            "type":["tools",]
         },
         "sw": { // ScreenWings
             "title": [
@@ -276,7 +337,8 @@
             "desc": [
                 "不到1m大小，开启后教师端将展示为全屏黑屏",
                 "可和MythwareToolkit搭配使用"
-            ]
+            ],
+            "type":["tools","antiCtrl",]
         },
         "mlp": { // MoonlightPortable
             "title": [
@@ -286,7 +348,8 @@
             "desc": [
                 "知名游戏串流工具，机房远程串流必备",
                 "需提前在被控端配置好Sunshine与虚拟显示器(推荐ParsecVDisplay)"
-            ]
+            ],
+            "type":["tools",]
         },
         "zt": { // ZeroTier-One
             "title": [
@@ -295,7 +358,8 @@
             ],
             "desc": [
                 "虚拟局域网客户端 懂得都懂",
-            ]
+            ],
+            "type":["tools",]
         },
         "bms": { // Bemuse
             "title": [
@@ -304,22 +368,42 @@
             "desc":[
                 "在线BMS播放器，内置大量曲目",
                 "<del>那些敲来敲去的人还觉得自己很酷！</del>"
-            ]
+            ],
+            "type":["games","webpages"]
         }   
     }
 
-    function LoadContentBySearchText() { // 是search 也是load
+    function LoadContentBySearchText() {
         const searchBox = document.getElementById('search-box');
         const query = searchBox.value.toLowerCase();
-        const results = Object.keys(index).filter(key => {
-            const project = index[key];
-            // 处理标题，移除冒号后的内容
-            const processedTitles = project.title.map(title => {
-                return title.toLowerCase().split(':')[0];
-            });
-            return processedTitles.some(processedTitle => processedTitle.includes(query)) ||
-                   project.desc.some(desc => desc.toLowerCase().includes(query));
-        });
+        const categorySelect = document.getElementById('category-select');
+        const filterMode = document.getElementById('filter-mode').value;
+        const selectedCategories = Array.from(categorySelect.options)
+            .filter(option => option.selected && option.value !== "all")
+            .map(option => option.value);
+
+        let results = Object.keys(index);
+
+        if (selectedCategories.length > 0) {
+            switch (filterMode) {
+                case "all":
+                    results = results.filter(key => {
+                        return index[key]["type"].every(cat => selectedCategories.includes(cat));
+                    });
+                    break;
+                case "inverse":
+                    results = results.filter(key => {
+                        return !index[key]["type"].some(cat => selectedCategories.includes(cat));
+                    });
+                    break;
+                case "any":
+                default:
+                    results = results.filter(key => {
+                        return index[key]["type"].some(cat => selectedCategories.includes(cat));
+                    });
+                    break;
+            }
+        }
 
         const projectDivContent = document.getElementById('projects');
         projectDivContent.innerHTML = ''; // 清空现有内容
@@ -348,8 +432,35 @@
             projectDivContent.appendChild(hr);
         });
     }
+    const tips = [
+        "本站建议以宽屏视图浏览",
+        "补药盗刷站长的CDN啊www",
+        "边按下Ctrl边选中分类可以多选分类",
+        "在选中分类“所有项目”时 规则“反选”不会起任何作用"
+    ];
 
-    document.addEventListener("DOMContentLoaded", LoadContentBySearchText);
+    // 函数用于更新提示信息
+    function updateTip() {
+        const randomIndex = Math.floor(Math.random() * tips.length);
+        const tip = tips[randomIndex];
+        document.getElementById('tip').innerText = `Tip: ${tip}`;
+    }
+
+    function Autorun(){
+        const categorySelect = document.getElementById('category-select');
+
+        // 监听分类选择器的变化
+        categorySelect.addEventListener('change', function() {
+            LoadContentBySearchText(); // 调用内容更新函数
+        });
+        updateTip();
+        setInterval(updateTip, 3000);
+        LoadContentBySearchText();
+    }
+
+    document.addEventListener("DOMContentLoaded", Autorun);
+
+
 
     function ToggleTitlesView() { // 标题/详细 视图切换
         var descElements = document.querySelectorAll('.searchable-desc');
@@ -360,12 +471,25 @@
         var toggleTitlesButton = document.getElementById('toggle-titles');
         toggleTitlesButton.textContent = descElements[0].classList.contains('hidden') ? "详细视图" : "标题视图";
     }
+    
 </script>
 
 <div id="search-container" class="flex-container">
     <input type="text" id="search-box" placeholder="搜索摸鱼工具... (留空以全部展示)">
     <button onclick="LoadContentBySearchText()">搜索</button>
     <button id="toggle-titles" onclick="ToggleTitlesView()">标题视图</button>
+    <select id="category-select" multiple>
+        <option value="all">所有项目</option>
+        <option value="antiCtrl">反控软件</option>
+        <option value="tools">工具</option>
+        <option value="games">游戏</option>
+        <option value="webpages">网页</option>
+    </select>
+    <select id="filter-mode">
+        <option value="any">至少匹配一个</option>
+        <option value="all">完全匹配</option>
+        <option value="inverse">反选</option>
+    </select>
 </div>
 
 
@@ -376,17 +500,17 @@
     本站网页(与网页源代码)以 <a href="https://www.gnu.org/licenses/agpl.txt">AGPL v3+</a>协议 开源在 <a href="https://github.com/gxxk-dev/gxxk-dev.github.io">Gxxk的Github个人仓库</a> 下 <br />
     网盘主页面：<a href="https://ouyhq.lanzouv.com/b0w84ycpg">https://ouyhq.lanzouv.com/b0w84ycpg</a> 提取码：gxxk<br>
     点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流下载页面/对应资源<br />
-    本站建议以宽屏视图浏览<br />
+    <div id="tip">Tip加载中...</div><br/>
     <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
     <details>
         <summary>关于本站的网络线路信息</summary><p>
-        本站同时部署了 3个静态页面托管服务，分别为：
+        本站同时部署了2个可见的静态页面托管服务与一个 境外TencentCDN服务，分别为：
         <ol>
-            <li><a href="https://frez79.site/">GithubPages</a>（速度与CF不相上下）</li>
-            <li><a href="https://cf.frez79.site/">Cloudflare Pages</a>（概率出现的人机验证会拖慢下载反控软件的时间）</li>
-            <li><a href="https://v.frez79.site/">Vercel</a>（速度最快但被墙几率大）</li>
+            <li><a href="https://frez79.site/">境外TencentCDN(frez79.site)</a>（GithubPages回源 速度最快但会有页面更新延迟）</li>
+            <li><a href="https://cf.frez79.site/">Cloudflare Pages</a>（无页面更新延迟 少几率被墙 概率出现的人机验证会拖慢下载反控软件的时间）</li>
+            <li><a href="https://v.frez79.site/">Vercel</a>（无页面更新延迟 速度与第一者持平 快但被墙几率大）</li>
         </ol>
-        （三者均有几率被墙 请根据自己所在学校机房的网络情况选择使用）<br/></p>
+        （首选 境外TencentCDN 请根据自己所在学校机房的网络情况选择使用）<br/></p>
     </details>
     <details>
         <summary>[碎碎念]关于本站的站点架构信息</summary><p>
