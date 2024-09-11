@@ -234,20 +234,20 @@
 </style> <!-- CSS用KimiAI写的 有点奇奇怪怪的隐性Bug 等以后系统的学了CSS以后来修一修 -->
 <script>
     const panUrls = { //基于pan盘的URL
-        "mcc": "https://ouyhq.panv.com/iiZX529fpxni",  // MyComputerClass v3.4.0
-        "jyt": "https://ouyhq.panv.com/iPPqr29fuvra",  // JiYuTrainer v1.7.6
-        "jyt4xp": "https://ouyhq.panv.com/iCy4829fuvjc",  // JiYuTrainer for XP v1.7.6
-        "jytp": "https://ouyhq.panv.com/iS0QB29j803c", // JiTuTrainer Pro
-        "7z": "https://ouyhq.panv.com/iFpNS29fvh0f",  // 7-zip(x86)
-        "7zx64": "https://ouyhq.panv.com/iBKq329fvgyd",  // 7-zip(x64)
-        "mt": "https://ouyhq.panv.com/iP8sj29h359g",  // MythwareToolkitv1.2.0
-        "mtvp": "https://ouyhq.panv.com/iN75p29iahmj",  // MythwareToolkitv.1.2.1(preview)
-        "sw": "https://ouyhq.panv.com/iKQ5Y29h4nfg",  // ScreenWings
-        "mlp": "https://ouyhq.panv.com/ipKtY29htc9e",  // MoonlightPortable
-        "mlpx64": "https://ouyhq.panv.com/iJm0z29htbxc",  // MoonlightPortable(x64)
+        "mcc": "https://ouyhq.lanzouv.com/iiZX529fpxni",  // MyComputerClass v3.4.0
+        "jyt": "https://ouyhq.lanzouv.com/iPPqr29fuvra",  // JiYuTrainer v1.7.6
+        "jyt4xp": "https://ouyhq.lanzouv.com/iCy4829fuvjc",  // JiYuTrainer for XP v1.7.6
+        "jytp": "https://ouyhq.lanzouv.com/iS0QB29j803c", // JiTuTrainer Pro
+        "7z": "https://ouyhq.lanzouv.com/iFpNS29fvh0f",  // 7-zip(x86)
+        "7zx64": "https://ouyhq.lanzouv.com/iBKq329fvgyd",  // 7-zip(x64)
+        "mt": "https://ouyhq.lanzouv.com/iP8sj29h359g",  // MythwareToolkitv1.2.0
+        "mtvp": "https://ouyhq.lanzouv.com/iN75p29iahmj",  // MythwareToolkitv.1.2.1(preview)
+        "sw": "https://ouyhq.lanzouv.com/iKQ5Y29h4nfg",  // ScreenWings
+        "mlp": "https://ouyhq.lanzouv.com/ipKtY29htc9e",  // MoonlightPortable
+        "mlpx64": "https://ouyhq.lanzouv.com/iJm0z29htbxc",  // MoonlightPortable(x64)
         // 未列出的部分
-        "zt": "https://ouyhq.panv.com/iZZJ429foy6b",  // ZeroTier-One
-        "zt4w7": "https://ouyhq.panv.com/i0iLN29foxkj",  // ZeroTier-One for win7
+        "zt": "https://ouyhq.lanzouv.com/iZZJ429foy6b",  // ZeroTier-One
+        "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
         
     };
     
@@ -470,7 +470,8 @@
         "补药盗刷站长的CDN啊www",
         "边按下Ctrl边选中分类可以多选分类",
         "在选中分类“所有项目”时 规则“反选”不会起任何作用",
-        "是的我知道这坨JS是shi"
+        "是的我知道这坨JS是shi",
+        "站长是一名初二学生党，网页(除CSS)是纯手撸的，如有Bug多多包涵plz",
     ];
 
     // 函数用于更新提示信息
@@ -487,6 +488,12 @@
         categorySelect.addEventListener('change', function() {
             LoadContentBySearchText(); // 调用内容更新函数
         });
+
+        const filterModeSelect = document.getElementById('filter-mode');
+        filterModeSelect.addEventListener('change', function() {
+            LoadContentBySearchText(); // 调用内容更新函数
+        });
+
         updateTip();
         setInterval(updateTip, 3000);
         LoadContentBySearchText();
@@ -530,7 +537,7 @@
     <hr />
     资源收录/纠错联系：<a href="mailto:gxxk@duck.com">gxxk@duck.com (点我发送)</a> <br/>
     本站网页(与网页源代码)以 <a href="https://www.gnu.org/licenses/agpl.txt">AGPL v3+</a>协议 开源在 <a href="https://github.com/gxxk-dev/gxxk-dev.github.io">Gxxk的Github个人仓库</a> 下 <br />
-    网盘主页面：<a href="https://ouyhq.panv.com/b0w84ycpg">https://ouyhq.panv.com/b0w84ycpg</a> 提取码：gxxk<br>
+    网盘主页面：<a href="https://ouyhq.lanzouv.com/b0w84ycpg">https://ouyhq.lanzouv.com/b0w84ycpg</a> 提取码：gxxk<br>
     点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流下载页面/对应资源<br />
     <div id="tip">Tip加载中...</div>
     <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
