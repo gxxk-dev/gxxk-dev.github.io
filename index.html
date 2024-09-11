@@ -233,42 +233,62 @@
 
 </style> <!-- CSS用KimiAI写的 有点奇奇怪怪的隐性Bug 等以后系统的学了CSS以后来修一修 -->
 <script>
-    const urls = {
-        "mcc": "https://ouyhq.lanzouv.com/iiZX529fpxni",  // MyComputerClass v3.4.0
-        "jyt": "https://ouyhq.lanzouv.com/iPPqr29fuvra",  // JiYuTrainer v1.7.6
-        "jyt4xp": "https://ouyhq.lanzouv.com/iCy4829fuvjc",  // JiYuTrainer for XP v1.7.6
-        "jytp": "https://ouyhq.lanzouv.com/iS0QB29j803c", // JiTuTrainer Pro
-        "7z": "https://ouyhq.lanzouv.com/iFpNS29fvh0f",  // 7-zip(x86)
-        "7zx64": "https://ouyhq.lanzouv.com/iBKq329fvgyd",  // 7-zip(x64)
-        "cfwp": "https://proxy.frez79.site/",  // CFWorker-HTTPProxy
-        "mt": "https://ouyhq.lanzouv.com/iP8sj29h359g",  // MythwareToolkitv1.2.0
-        "mtvp": "https://ouyhq.lanzouv.com/iN75p29iahmj",  // MythwareToolkitv.1.2.1(preview)
-        "sw": "https://ouyhq.lanzouv.com/iKQ5Y29h4nfg",  // ScreenWings
-        "mlp": "https://ouyhq.lanzouv.com/ipKtY29htc9e",  // MoonlightPortable
-        "mlpx64": "https://ouyhq.lanzouv.com/iJm0z29htbxc",  // MoonlightPortable(x64)
+    const panUrls = { //基于pan盘的URL
+        "mcc": "https://ouyhq.panv.com/iiZX529fpxni",  // MyComputerClass v3.4.0
+        "jyt": "https://ouyhq.panv.com/iPPqr29fuvra",  // JiYuTrainer v1.7.6
+        "jyt4xp": "https://ouyhq.panv.com/iCy4829fuvjc",  // JiYuTrainer for XP v1.7.6
+        "jytp": "https://ouyhq.panv.com/iS0QB29j803c", // JiTuTrainer Pro
+        "7z": "https://ouyhq.panv.com/iFpNS29fvh0f",  // 7-zip(x86)
+        "7zx64": "https://ouyhq.panv.com/iBKq329fvgyd",  // 7-zip(x64)
+        "mt": "https://ouyhq.panv.com/iP8sj29h359g",  // MythwareToolkitv1.2.0
+        "mtvp": "https://ouyhq.panv.com/iN75p29iahmj",  // MythwareToolkitv.1.2.1(preview)
+        "sw": "https://ouyhq.panv.com/iKQ5Y29h4nfg",  // ScreenWings
+        "mlp": "https://ouyhq.panv.com/ipKtY29htc9e",  // MoonlightPortable
+        "mlpx64": "https://ouyhq.panv.com/iJm0z29htbxc",  // MoonlightPortable(x64)
         // 未列出的部分
-        "zt": "https://ouyhq.lanzouv.com/iZZJ429foy6b",  // ZeroTier-One
-        "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
-        "bms": "https://bemuse.ninja/"  // Bemuse
+        "zt": "https://ouyhq.panv.com/iZZJ429foy6b",  // ZeroTier-One
+        "zt4w7": "https://ouyhq.panv.com/i0iLN29foxkj",  // ZeroTier-One for win7
+        
     };
     
+    const directUrls ={ // 原则上讲 只会给以反控为主的项目提供下载用直链
+        "mcc":"./files/mcc_v3.4.0.exe",
+        "jyt":"./files/jyt.exe",
+        "jyt4xp":"./files/jyt4xp.exe",
+        "jytp":"./files/jytp.exe",
+        "mt":"./files/mt1.2.exe",
+
+        // 不涉及到文件下载的直链
+        "cfwp": "https://proxy.frez79.site/",  // CFWorker-HTTPProxy
+        "bms": "https://bemuse.ninja/",  // Bemuse
+        "imcre_game":"https://games.imc.re/" // IMCRE-Games
+    }
     try { // 自动跳转功能
         param=window.location.href.split("?")[1]
-        data = urls[param]
-        if (data!=undefined){
+        data = panUrls[param]
+        data2 = directUrls[param]
+        if (data2!=undefined && window.location.href.split("?")[2]!="pu"){ // pu PanUrl的缩写
+            window.location.href = data2;
+        }else if (data!=undefined){
             window.location.href = data;
         }else if (param!=undefined){
             alert(`来来来你说说这个${window.location.href.split("?")[1]}是哪个软件的ID\n(未找到此ID对应的软件分流下载URL)`)
         }
     } catch {}
 
-    function A(url){ // 快速插入URL
+    function pan(id){ // 快速插入URL
+        return `<a href="${panUrls[id]}">蓝奏分流</a>`
+    }
+    function A(url){
         return `<a href="${url}">${url}</a>`
+    }
+    function Direct(id){
+        return `<a href="${directUrls[id]}">直链下载</a>`
     }
     const index = { // 软件索引 包含标题与介绍
         "mcc": { // My Computer Class
             "title":[
-                `mcc|MyComputerClass v3.4.0: ${A(urls["mcc"])}`,
+                `mcc|MyComputerClass v3.4.0: ${pan("mcc")} ${Direct("mcc")}`,
             ],
             "desc":[
                 "由以赏大佬开发，支持极域/红蜘蛛",
@@ -281,9 +301,9 @@
         },
         "jyt": { // JiYu Trainer
             "title":[
-                `jyt|JiYuTrainer v1.7.6:${A(urls["jyt"])}`,
-                `jyt4xp|JiYuTrainer for XP v1.7.6:${A(urls["jyt4xp"])}`,
-                `jytp|JiYuTrainer Pro:${A(urls["jytp"])}`
+                `jyt|JiYuTrainer v1.7.6:${pan("jyt")} ${Direct("jyt")}`,
+                `jyt4xp|JiYuTrainer for XP v1.7.6:${pan("jyt4xp")} ${Direct("jyt4xp")}`,
+                `jytp|JiYuTrainer Pro:${pan("jytp")} ${Direct("jytp")}`
             ],
             "desc":[
                 "仓库github@imengyu/JiYuTrainer(archive于21.12.03)，针对极域开发",
@@ -296,8 +316,8 @@
         },
         "7z": { // 7-zip
             "title":[
-                `7z|7-zip(x86):${A(urls["7z"])}`,
-                `7zx64|7-zip(x64):${A(urls["7zx64"])}`
+                `7z|7-zip(x86):${pan("7z")}`,
+                `7zx64|7-zip(x64):${pan("7zx64")}`
             ],
             "desc":[
                 "高性能解压缩工具，支持多种压缩格式",
@@ -307,7 +327,7 @@
         },
         "cfwp": { // CFWorker-HTTPProxy
             "title":[
-                `cfwp|CFWorker HTTP Proxy:${A(urls["cfwp"])}`,
+                `cfwp|CFWorker HTTP Proxy:${A(directUrls["cfwp"])}`,
             ],
             "desc":[
                 "基于Cloudflare Workers搭建的HTTP代理服务",
@@ -317,8 +337,8 @@
         },
         "mt": { // MythwareToolkit
             "title": [
-                `mt|MythwareToolkit v1.2.0: ${A(urls["mt"])}`,
-                `mtvp|MythwareToolkit v1.2.1(preview): ${A(urls["mtvp"])}`
+                `mt|MythwareToolkit v1.2.0: ${pan("mt")} ${Direct("mt")}`,
+                `mtvp|MythwareToolkit v1.2.1(preview): ${pan("mtvp")}`
             ],
             "desc": [
                 "仓库github@BengbuGuards/MythwareToolkit(仍在持续更新) 针对极域/机房助手开发",
@@ -332,7 +352,7 @@
         },
         "sw": { // ScreenWings
             "title": [
-                `sw|ScreenWings: ${A(urls["sw"])}`
+                `sw|ScreenWings: ${pan("sw")}`
             ],
             "desc": [
                 "不到1m大小，开启后教师端将展示为全屏黑屏",
@@ -342,8 +362,8 @@
         },
         "mlp": { // MoonlightPortable
             "title": [
-                `mlp|MoonlightPortable(x86): ${A(urls["mlp"])}`,
-                `mlpx64|MoonlightPortable(x64): ${A(urls["mlpx64"])}`
+                `mlp|MoonlightPortable(x86): ${pan("mlp")}`,
+                `mlpx64|MoonlightPortable(x64): ${pan("mlpx64")}`
             ],
             "desc": [
                 "知名游戏串流工具，机房远程串流必备",
@@ -353,8 +373,8 @@
         },
         "zt": { // ZeroTier-One
             "title": [
-                `zt|ZeroTier-One: ${A(urls["zt"])}`,
-                `zt4w7|ZeroTier-One for win7: ${A(urls["zt4w7"])}`
+                `zt|ZeroTier-One: ${pan("zt")}`,
+                `zt4w7|ZeroTier-One for win7: ${pan("zt4w7")}`
             ],
             "desc": [
                 "虚拟局域网客户端 懂得都懂",
@@ -363,14 +383,24 @@
         },
         "bms": { // Bemuse
             "title": [
-                `bms|Bemuse: ${A(urls["bms"])}`,
+                `bms|Bemuse: ${A(directUrls["bms"])}`,
             ],
             "desc":[
                 "在线BMS播放器，内置大量曲目",
                 "<del>那些敲来敲去的人还觉得自己很酷！</del>"
             ],
             "type":["games","webpages"]
-        }   
+        },
+        "imcre_game": { // IMCRE Game
+            "title": [
+                `imcre_game|IMCRE Game: ${A(directUrls["imcre_game"])}`,
+            ],
+            "desc":[
+                "在线小游戏集合 <del>果子大劲道口味正(bushi)</del>",
+                "IMC.RE 实力无需多言"
+            ],
+            "type":["games","webpages"]
+        }
     }
 
     function LoadContentBySearchText() {
@@ -411,13 +441,15 @@
         // 显示搜索结果
         results.forEach(key => {
             const project = index[key];
+            const singleProjectDiv=document.createElement("div");
+            singleProjectDiv.id = key;
             const titleDiv = document.createElement('div');
             project.title.forEach(titleText => {
                 const title = document.createElement('h3');
                 title.innerHTML = titleText;
                 titleDiv.appendChild(title);
             });
-            projectDivContent.appendChild(titleDiv);
+            singleProjectDiv.appendChild(titleDiv);
             // 创建描述列表
             const descList = document.createElement('ul');
             project.desc.forEach(desc => {
@@ -426,8 +458,9 @@
                 listItem.className = 'searchable-desc'; // 添加类名用于后续操作
                 descList.appendChild(listItem);
             });
-            projectDivContent.appendChild(descList);
+            singleProjectDiv.appendChild(descList);
             // 添加分隔线
+            projectDivContent.appendChild(singleProjectDiv);    
             const hr = document.createElement('hr');
             projectDivContent.appendChild(hr);
         });
@@ -436,7 +469,8 @@
         "本站建议以宽屏视图浏览",
         "补药盗刷站长的CDN啊www",
         "边按下Ctrl边选中分类可以多选分类",
-        "在选中分类“所有项目”时 规则“反选”不会起任何作用"
+        "在选中分类“所有项目”时 规则“反选”不会起任何作用",
+        "是的我知道这坨JS是shi"
     ];
 
     // 函数用于更新提示信息
@@ -459,8 +493,6 @@
     }
 
     document.addEventListener("DOMContentLoaded", Autorun);
-
-
 
     function ToggleTitlesView() { // 标题/详细 视图切换
         var descElements = document.querySelectorAll('.searchable-desc');
@@ -498,7 +530,7 @@
     <hr />
     资源收录/纠错联系：<a href="mailto:gxxk@duck.com">gxxk@duck.com (点我发送)</a> <br/>
     本站网页(与网页源代码)以 <a href="https://www.gnu.org/licenses/agpl.txt">AGPL v3+</a>协议 开源在 <a href="https://github.com/gxxk-dev/gxxk-dev.github.io">Gxxk的Github个人仓库</a> 下 <br />
-    网盘主页面：<a href="https://ouyhq.lanzouv.com/b0w84ycpg">https://ouyhq.lanzouv.com/b0w84ycpg</a> 提取码：gxxk<br>
+    网盘主页面：<a href="https://ouyhq.panv.com/b0w84ycpg">https://ouyhq.panv.com/b0w84ycpg</a> 提取码：gxxk<br>
     点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流下载页面/对应资源<br />
     <div id="tip">Tip加载中...</div>
     <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
@@ -537,11 +569,23 @@
         <code>cfwp|CFWorker HTTP Proxy(x86):https://proxy.frez79.site/</code><br/>
         则开头的<code>cfwp</code>就是ID
         </p>
+        
     </details>
-    <noscript>本站点的页面主内容加载需要JavaScript!</noscript>
+
+    <details>
+        <summary>关于直链下载对快速跳转的影响</summary><p>
+        在对应项目含有直链时 快速跳转会默认跳转到直链链接进行下载 以便加快速度 提升体验 <br/>
+        您可以通过在原快速下载的URL后加上 <code>1?pu</code> 以强制跳转到网盘链接<br/>
+        （PU：即PanUrl）<br/>
+        直链功能不会影响到其他项目，只有含有直链的项目才会跳转到直链链接<br/>
+        </p>
+    </details>
+
+    
     <hr />
 
     <div id="projects">
+        <noscript>本站点的页面主内容加载需要JavaScript!</noscript>
         <!-- 软件展示区 -->
     </div>
 </div>
