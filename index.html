@@ -1,7 +1,14 @@
 <title>机房摸鱼之盾</title>
 <style>
     :root {
-        --min-padding: 8px; /* 定义最小边距值 */
+        --min-padding: 8px;
+        --background-primary: #1e1e1e;
+        --background-secondary: #282828;
+        --text-primary: #dcdcdc;
+        --text-secondary: #bcbcbc;
+        --border-radius: 4px;
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        --transition: 0.3s;
     }
 
     body {
@@ -11,123 +18,86 @@
         min-height: 100vh;
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #1e1e1e;
-        color: #dcdcdc;
+        background-color: var(--background-primary);
+        color: var(--text-primary);
         box-sizing: border-box;
-        padding: calc(var(--min-padding) + 1vw) 0; /* 应用垂直边距 */
+        padding: calc(var(--min-padding) + 1vw) 0;
     }
 
     #centered-content {
-        max-width: calc(100vw - 2 * var(--min-padding)); /* 减去两侧最小边距的两倍 */
+        max-width: calc(100vw - 2 * var(--min-padding));
         width: 100%;
-        background: #282828;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, .5);
+        background: var(--background-secondary);
+        box-shadow: var(--box-shadow);
         padding: 20px;
-        color: #bcbcbc;
+        color: var(--text-secondary);
         font-size: 16px;
         line-height: 1.6;
         box-sizing: border-box;
-        width: fit-content; /* 使用 fit-content 以适应内容的实际宽度 */
-        margin: auto; /* 居中显示 */
+        width: fit-content;
+        margin: auto;
     }
 
     a {
         color: #4078c0;
         text-decoration: none;
-        transition: color .3s
+        transition: color var(--transition);
     }
 
     a:hover {
-        color: #5aaafa
+        color: #5aaafa;
     }
 
-    /* 为所有标题元素增加醒目样式 */
-
     h1, h2, h3, h4, h5, h6 {
-        color: #ffffff; /* 设置文本颜色为白色，确保在深色背景上醒目 */
-        font-weight: bold; /* 字体加粗 */
-        text-shadow: 1px 1px 2px #000; /* 添加轻微的文字阴影，增强立体感 */
-        margin-top: 8px; /* 增加顶部边距 */
-        margin-bottom: 8px; /* 增加底部边距 */
+        color: #ffffff;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px #000;
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
 
     h2 {
-        border-bottom: 2px solid #5a5a5a; /* h2 标题下方添加一条细线 */
-        padding-bottom: 5px; /* 增加底部内边距 */
+        border-bottom: 2px solid #5a5a5a;
+        padding-bottom: 5px;
     }
 
-    /* 为链接样式增加变化，如果标题中包含链接 */
     h1 a, h2 a, h3 a {
-        color: #ffffff; /* 链接颜色 */
-        text-decoration: none; /* 去除下划线 */
-        transition: color 0.3s; /* 颜色变化的过渡效果 */
+        color: #ffffff;
+        text-decoration: none;
+        transition: color var(--transition);
     }
 
     h1 a:hover, h2 a:hover, h3 a:hover {
-        color: #cccccc; /* 鼠标悬停时的链接颜色 */
+        color: #cccccc;
     }
 
     .flex-container {
         display: flex;
         gap: 10px;
         align-items: center;
-        position: fixed; /* 确保这一行没有被覆盖 */
+        position: fixed;
         top: 20px;
         right: 20px;
         z-index: 1000;
         padding: 8px 16px;
-        border-radius: 8px;
+        backdrop-filter: blur(2px);
+        background-color: rgba(40, 40, 40, 0.2);
+        border-radius: var(--border-radius);
+        justify-content: space-between;
+        box-shadow: var(--box-shadow);
     }
-    
-    /* 为 details 标签内除 summary 外的子元素添加缩进 */
+
     details > :not(summary) {
-        padding-left: 20px; /* 添加缩进 */
-    }
-
-
-    /* 为 summary 元素调整尺寸 */
-    summary {
-        font-size: 0.875em; /* 减小字体大小 */
-        padding: 6px 12px; /* 减小内边距 */
-        border-radius: 3px; /* 减小圆角边框的大小 */
-    }
-
-    /* 为 details 元素调整尺寸 */
-    details {
-        padding: 8px 16px; /* 减小内边距 */
-        border-radius: 6px; /* 减小圆角边框的大小 */
-    }
-
-    /* 为 details 元素中的内容调整尺寸 */
-    details p, details ul, details ol {
-        font-size: 0.875em; /* 减小内容的字体大小 */
-        line-height: 1.4; /* 减小行高 */
-    }
-
-    /* 为 details 内嵌套的 details 元素调整尺寸 */
-    details details {
-        padding: 6px 12px; /* 减小内边距 */
-        border-radius: 4px; /* 减小圆角边框的大小 */
-    }
-
-    .hidden {
-        display: none;
-    }
-
-
-    code {
-        background-color: #373737; /* 另一种深色背景 */
-        color: #ffffff; /* 白色文本，高对比度 */
-        padding: 2px 4px;
-        border-radius: 4px;
-        font-family: 'Courier New', Courier, monospace;
-        border: 1px solid #505050; /* 边框颜色 */
+        padding-left: 20px;
     }
 
     summary {
+        font-size: 0.875em;
+        padding: 6px 12px;
+        border-radius: 3px;
         background-color: #373737; /* 深色背景，与页面主题协调 */
         color: #ffffff; /* 明亮的文本颜色，提高可见性 */
-        padding: 10px 20px; /* 增加内边距，使点击区域更大 */
+        padding: 5px 10px; /* 增加内边距，使点击区域更大 */
         border-radius: 5px; /* 轻微的圆角边框 */
         border: 1px solid #444444; /* 轻微的边框 */
         font-weight: bold; /* 加粗字体 */
@@ -145,77 +115,99 @@
         border-bottom: 1px solid #5a5a5a; /* 展开时底部边框颜色变化 */
     }
 
-    /* 选择器容器样式 */
-    #search-container {
-        backdrop-filter: blur(5px);
-        background-color: rgba(40,40,40, 0.2);
-        border-radius: 8px;
-        padding: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 10px;
-        border-radius: 8px; /* 圆角边框 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 轻微的阴影效果 */
+    details {
+        padding: 8px 16px;
+        border-radius: 6px;
     }
 
-    /* 选择器样式 */
+    details p, details ul, details ol {
+        font-size: 0.875em;
+        line-height: 1.4;
+    }
+
+    details details {
+        padding: 6px 12px;
+        border-radius: 4px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    code {
+        background-color: #373737;
+        color: #ffffff;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        border: 1px solid #505050;
+    }
+
+    #rule-container {
+        align-items: center;
+        display: flex;
+        position: fixed;
+        top: 8px;
+        left: 16px;
+        font-size: 18px;
+        width: 150px;
+    }
+
+    .search-group label {
+        margin-bottom: 5px;
+    }
+
     #category-select, #filter-mode {
         margin: 5px;
         padding: 8px 16px;
         font-size: 16px;
         max-height: 70px;
-        color: #ffffff; /* 文本颜色 */
-        background-color: #373737; /* 背景颜色 */
-        border: none; /* 移除边框 */
-        outline: none; /* 移除焦点轮廓 */
-        border-radius: 4px; /* 圆角边框 */
-        cursor: pointer; /* 指针样式 */
-        transition: background-color 0.3s, box-shadow 0.3s; /* 过渡效果 */
+        color: #ffffff;
+        background-color: #373737;
+        border: none;
+        outline: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color var(--transition), box-shadow var(--transition);
     }
 
-    /* 选择器在聚焦或被点击时的样式 */
     #category-select:focus, #filter-mode:focus,
     #category-select:active, #filter-mode:active {
-        background-color: #484848; /* 聚焦或点击时的背景颜色 */
-        box-shadow: 0 0 8px rgba(90, 170, 250, 0.5); /* 聚焦或点击时的阴影效果 */
+        background-color: #484848;
+        box-shadow: 0 0 8px rgba(90, 170, 250, 0.5);
     }
 
-    /* 搜索框样式 */
     #search-box {
         padding: 8px;
         border: 1px solid #dcdcdc;
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         font-size: 16px;
-        color: #bcbcbc;
-        background-color: #282828;
+        color: var(--text-secondary);
+        background-color: var(--background-secondary);
+        width: 280px;
         margin: 5px;
     }
 
-    /* 搜索框聚焦时的样式 */
     #search-box:focus {
         outline: none;
         border-color: #5aaafa;
     }
 
-    /* 按钮样式 */
     button {
         padding: 8px 16px;
         border: none;
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         background-color: #4078c0;
-        color: #dcdcdc;
+        color: var(--text-primary);
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color var(--transition);
         margin: 5px;
     }
 
-    /* 按钮悬停时的样式 */
     button:hover {
         background-color: #5aaafa;
     }
 
-    /* 为选择器添加独特的外观 */
     #category-select, #filter-mode {
         background-image: linear-gradient(to bottom, #3d3d3d, #282828);
         border: 1px solid #5a5a5a;
@@ -230,7 +222,6 @@
     #category-select:active, #filter-mode:active {
         box-shadow: 0 0 10px #7a7a7a, inset 0 1px 0 #606060;
     }
-
 </style> <!-- CSS用KimiAI写的 有点奇奇怪怪的隐性Bug 等以后系统的学了CSS以后来修一修 -->
 <script>
     const panUrls = { //基于pan盘的URL
@@ -245,10 +236,9 @@
         "sw": "https://ouyhq.lanzouv.com/iKQ5Y29h4nfg",  // ScreenWings
         "mlp": "https://ouyhq.lanzouv.com/ipKtY29htc9e",  // MoonlightPortable
         "mlpx64": "https://ouyhq.lanzouv.com/iJm0z29htbxc",  // MoonlightPortable(x64)
-        // 未列出的部分
         "zt": "https://ouyhq.lanzouv.com/iZZJ429foy6b",  // ZeroTier-One
         "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
-        
+        "kste06_green": "https://ouyhq.lanzouv.com/iCZ6Z29vvofi" // 金山打字(KingSoft-TypeEazy)2006绿色版
     };
     
     const directUrls ={ // 原则上讲 只会给以反控为主的项目提供下载用直链
@@ -258,10 +248,15 @@
         "jytp":"./files/jytp.exe",
         "mt":"./files/mt1.2.exe",
 
-        // 不涉及到文件下载的直链
+        // 不涉及到站内下载的直链
+        "kste10_game_gr":"http://wdl1.cache.wps.cn/dzt/game/dzt_great_race.exe", // 金山打字(KingSoft-TypeEazy)系列
+        "kste16":"https://package.op.wpscdn.cn/wps/download/typeeasy.22059.12012.0.exe",
+
+        // 不涉及到下载的直链
         "cfwp": "https://proxy.frez79.site/",  // CFWorker-HTTPProxy
         "bms": "https://bemuse.ninja/",  // Bemuse
-        "imcre_game":"https://games.imc.re/" // IMCRE-Games
+        "imcre_game":"https://games.imc.re/", // IMCRE-Games
+        "thdl":"https://cloud.lilywhite.cc/"
     }
     try { // 自动跳转功能
         param=window.location.href.split("?")[1]
@@ -400,6 +395,27 @@
                 "IMC.RE 实力无需多言"
             ],
             "type":["games","webpages"]
+        },
+        "kste" : { // 金山打字
+            "title": [
+                `kste06_green|金山打字2006绿色版: ${pan("kste06_green")}`,
+                `kste10_game_gr|金山打字2010之生死时速: ${Direct("kste10_game_gr")}`,
+                `kste16|金山打字2016: ${Direct("kste16")}`
+            ],
+            "desc":[
+                "应同学要求加的键入练习软件 好用就完事了",
+                `如“打字游戏”(TypeGame.exe)功能提示缺失DX7 请补全DX7并下载此DLL:${A('https://cn.dll-files.com/dx7vb.dll.html')}`,
+                `（或可以尝试下载kste10_game1以补全运行库）`,
+                `kste06_green与kste10_game_gr均来源于52破解论坛:${A("https://www.52pojie.cn/thread-1730978-1-1.html")}`
+            ],  
+            "type":["games","tools"]
+        },
+        "thdl":{ // 东方Project资源下载站
+            "title":
+                [`thdl|莉莉云(东方Project资源下载站): ${A(directUrls["thdl"])}`,],
+            "desc":
+                [`最全面的THProject资源下载站`,],
+            "type":["webpages","tools"]
         }
     }
 
@@ -411,37 +427,49 @@
         const selectedCategories = Array.from(categorySelect.options)
             .filter(option => option.selected && option.value !== "all")
             .map(option => option.value);
-
+        
         let results = Object.keys(index);
-
+        
+        // 根据分类筛选
         if (selectedCategories.length > 0) {
             switch (filterMode) {
                 case "all":
                     results = results.filter(key => {
-                        return index[key]["type"].every(cat => selectedCategories.includes(cat));
+                        // 检查项目类型是否完全包含所有选中的分类
+                        return index[key]["type"].length === selectedCategories.length &&
+                               index[key]["type"].every(cat => selectedCategories.includes(cat));
                     });
                     break;
                 case "inverse":
                     results = results.filter(key => {
-                        return !index[key]["type"].some(cat => selectedCategories.includes(cat));
+                        // 检查项目类型是否不包含任何一个选中的分类
+                        return index[key]["type"].every(cat => !selectedCategories.includes(cat));
                     });
                     break;
                 case "any":
                 default:
                     results = results.filter(key => {
+                        // 检查项目类型是否至少包含一个选中的分类
                         return index[key]["type"].some(cat => selectedCategories.includes(cat));
                     });
                     break;
             }
         }
-
+    
+        // 根据查询文本筛选
+        if (query) {
+            results = results.filter(key => {
+                return index[key]["title"].some(title => title.toLowerCase().includes(query));
+            });
+        }
+    
         const projectDivContent = document.getElementById('projects');
         projectDivContent.innerHTML = ''; // 清空现有内容
-
+    
         // 显示搜索结果
         results.forEach(key => {
             const project = index[key];
-            const singleProjectDiv=document.createElement("div");
+            const singleProjectDiv = document.createElement("div");
             singleProjectDiv.id = key;
             const titleDiv = document.createElement('div');
             project.title.forEach(titleText => {
@@ -459,11 +487,17 @@
                 descList.appendChild(listItem);
             });
             singleProjectDiv.appendChild(descList);
-            // 添加分隔线
-            projectDivContent.appendChild(singleProjectDiv);    
-            const hr = document.createElement('hr');
-            projectDivContent.appendChild(hr);
+            // 添加到内容区域
+            projectDivContent.appendChild(singleProjectDiv);
         });
+    
+        // 如果没有结果，显示提示信息
+        if (results.length === 0) {
+            const noResultsDiv = document.createElement("div");
+            noResultsDiv.innerHTML = "没有找到匹配的结果。";
+            noResultsDiv.style.textAlign = "center";
+            projectDivContent.appendChild(noResultsDiv);
+        }
     }
     const tips = [
         "本站建议以宽屏视图浏览",
@@ -472,6 +506,7 @@
         "在选中分类“所有项目”时 规则“反选”不会起任何作用",
         "是的我知道这坨JS是shi",
         "站长是一名初二学生党，网页(除CSS)是纯手撸的，如有Bug多多包涵plz",
+        "搜索框大小写不敏感 可输入全小写文字匹配大写字母",
     ];
 
     // 函数用于更新提示信息
@@ -485,14 +520,10 @@
         const categorySelect = document.getElementById('category-select');
 
         // 监听分类选择器的变化
-        categorySelect.addEventListener('change', function() {
-            LoadContentBySearchText(); // 调用内容更新函数
-        });
+        categorySelect.addEventListener('change', LoadContentBySearchText);
 
         const filterModeSelect = document.getElementById('filter-mode');
-        filterModeSelect.addEventListener('change', function() {
-            LoadContentBySearchText(); // 调用内容更新函数
-        });
+        filterModeSelect.addEventListener('change', LoadContentBySearchText);
 
         updateTip();
         setInterval(updateTip, 3000);
@@ -512,24 +543,31 @@
     }
     
 </script>
-
-<div id="search-container" class="flex-container">
-    <input type="text" id="search-box" placeholder="搜索摸鱼工具... (留空以全部展示)">
-    <button onclick="LoadContentBySearchText()">搜索</button>
-    <button id="toggle-titles" onclick="ToggleTitlesView()">标题视图</button>
-    <select id="category-select" multiple>
-        <option value="all">所有项目</option>
-        <option value="antiCtrl">反控软件</option>
-        <option value="tools">工具</option>
-        <option value="games">游戏</option>
-        <option value="webpages">网页</option>
-    </select>
-    <select id="filter-mode">
-        <option value="any">至少匹配一个</option>
-        <option value="all">完全匹配</option>
-        <option value="inverse">反选</option>
-    </select>
+<div class="flex-container">
+    <input type="text" id="search-box" placeholder="搜索项目... (留空以全部展示)"></input>
+    <div class="button-container">
+        <button onclick="LoadContentBySearchText()">搜索</button>
+        <button id="toggle-titles" onclick="ToggleTitlesView()">标题视图</button>
+    </div>
 </div>
+<div class="flex-container" id="rule-container">
+    <div class="search-group">
+        <label>分类选择：</label><br/>
+        <select id="category-select" multiple>
+            <option value="all">所有项目</option>
+            <option value="antiCtrl">反控软件</option>
+            <option value="tools">工具</option>
+            <option value="games">游戏</option>
+            <option value="webpages">网页</option>
+        </select><br/>  
+        <label>匹配规则：</label><br/>
+        <select id="filter-mode">
+            <option value="any">至少匹配一个</option>
+            <option value="all">完全匹配</option>
+            <option value="inverse">反选</option>
+        </select>
+    </div>
+</div>  
 
 
 <div id="centered-content">
@@ -576,7 +614,6 @@
         <code>cfwp|CFWorker HTTP Proxy(x86):https://proxy.frez79.site/</code><br/>
         则开头的<code>cfwp</code>就是ID
         </p>
-        
     </details>
 
     <details>
