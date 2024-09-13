@@ -147,7 +147,7 @@
         align-items: center;
         display: flex;
         position: fixed;
-        top: 8px;
+        top: 20px;
         left: 16px;
         font-size: 18px;
         width: 150px;
@@ -238,7 +238,8 @@
         "mlpx64": "https://ouyhq.lanzouv.com/iJm0z29htbxc",  // MoonlightPortable(x64)
         "zt": "https://ouyhq.lanzouv.com/iZZJ429foy6b",  // ZeroTier-One
         "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
-        "kste06_green": "https://ouyhq.lanzouv.com/iCZ6Z29vvofi" // 金山打字(KingSoft-TypeEazy)2006绿色版
+        "kste06_green": "https://ouyhq.lanzouv.com/iCZ6Z29vvofi", // 金山打字(KingSoft-TypeEazy)2006绿色版
+        "g2k": "https://ouyhq.lanzouv.com/iWTnN29xstjg" // Glass2K
     };
     
     const directUrls ={ // 原则上讲 只会给以反控为主的项目提供下载用直链
@@ -283,7 +284,7 @@
     const index = { // 软件索引 包含标题与介绍
         "mcc": { // My Computer Class
             "title":[
-                `mcc|MyComputerClass v3.4.0: ${pan("mcc")} ${Direct("mcc")}`,
+                `mcc|[反控]MyComputerClass v3.4.0: ${pan("mcc")} ${Direct("mcc")}`,
             ],
             "desc":[
                 "由以赏大佬开发，支持极域/红蜘蛛",
@@ -296,9 +297,9 @@
         },
         "jyt": { // JiYu Trainer
             "title":[
-                `jyt|JiYuTrainer v1.7.6:${pan("jyt")} ${Direct("jyt")}`,
-                `jyt4xp|JiYuTrainer for XP v1.7.6:${pan("jyt4xp")} ${Direct("jyt4xp")}`,
-                `jytp|JiYuTrainer Pro:${pan("jytp")} ${Direct("jytp")}`
+                `jyt|[反控]JiYuTrainer v1.7.6:${pan("jyt")} ${Direct("jyt")}`,
+                `jyt4xp|[反控]JiYuTrainer for XP v1.7.6:${pan("jyt4xp")} ${Direct("jyt4xp")}`,
+                `jytp|[反控]JiYuTrainer Pro:${pan("jytp")} ${Direct("jytp")}`
             ],
             "desc":[
                 "仓库github@imengyu/JiYuTrainer(archive于21.12.03)，针对极域开发",
@@ -332,8 +333,8 @@
         },
         "mt": { // MythwareToolkit
             "title": [
-                `mt|MythwareToolkit v1.2.0: ${pan("mt")} ${Direct("mt")}`,
-                `mtvp|MythwareToolkit v1.2.1(preview): ${pan("mtvp")}`
+                `mt|[反控]MythwareToolkit v1.2.0: ${pan("mt")} ${Direct("mt")}`,
+                `mtvp|[反控]MythwareToolkit v1.2.1(preview): ${pan("mtvp")}`
             ],
             "desc": [
                 "仓库github@BengbuGuards/MythwareToolkit(仍在持续更新) 针对极域/机房助手开发",
@@ -347,7 +348,7 @@
         },
         "sw": { // ScreenWings
             "title": [
-                `sw|ScreenWings: ${pan("sw")}`
+                `sw|[屏幕防监视]ScreenWings: ${pan("sw")}`
             ],
             "desc": [
                 "不到1m大小，开启后教师端将展示为全屏黑屏",
@@ -357,8 +358,8 @@
         },
         "mlp": { // MoonlightPortable
             "title": [
-                `mlp|MoonlightPortable(x86): ${pan("mlp")}`,
-                `mlpx64|MoonlightPortable(x64): ${pan("mlpx64")}`
+                `mlp|[远程串流]MoonlightPortable(x86): ${pan("mlp")}`,
+                `mlpx64|[远程串流]MoonlightPortable(x64): ${pan("mlpx64")}`
             ],
             "desc": [
                 "知名游戏串流工具，机房远程串流必备",
@@ -368,8 +369,8 @@
         },
         "zt": { // ZeroTier-One
             "title": [
-                `zt|ZeroTier-One: ${pan("zt")}`,
-                `zt4w7|ZeroTier-One for win7: ${pan("zt4w7")}`
+                `zt|[虚拟局域网]ZeroTier-One: ${pan("zt")}`,
+                `zt4w7|[虚拟局域网]ZeroTier-One for win7: ${pan("zt4w7")}`
             ],
             "desc": [
                 "虚拟局域网客户端 懂得都懂",
@@ -388,7 +389,7 @@
         },
         "imcre_game": { // IMCRE Game
             "title": [
-                `imcre_game|IMCRE Game: ${A(directUrls["imcre_game"])}`,
+                `imcre_game|[网页游戏]IMCRE Game: ${A(directUrls["imcre_game"])}`,
             ],
             "desc":[
                 "在线小游戏集合 <del>果子大劲道口味正(bushi)</del>",
@@ -416,7 +417,14 @@
             "desc":
                 [`最全面的THProject资源下载站`,],
             "type":["webpages","tools"]
-        }
+        },
+        "g2k":{ // Glass2K
+            "title":
+                [`g2k|[窗口透明化]Glass2K: ${pan("g2k")}`,],
+            "desc":
+                [`一个轻量级的窗口透明化工具`,`摸鱼必备`],
+            "type":["tools"]
+        },
     }
 
     function LoadContentBySearchText() {
@@ -507,6 +515,7 @@
         "是的我知道这坨JS是shi",
         "站长是一名初二学生党，网页(除CSS)是纯手撸的，如有Bug多多包涵plz",
         "搜索框大小写不敏感 可输入全小写文字匹配大写字母",
+        "可能宽屏看不出来 但是我给两个搜索框加了毛玻璃和阴影..."
     ];
 
     // 函数用于更新提示信息
@@ -560,7 +569,7 @@
             <option value="games">游戏</option>
             <option value="webpages">网页</option>
         </select><br/>  
-        <label>匹配规则：</label><br/>
+        <label>分类匹配规则：</label><br/>
         <select id="filter-mode">
             <option value="any">至少匹配一个</option>
             <option value="all">完全匹配</option>
@@ -579,6 +588,41 @@
     点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流下载页面/对应资源<br />
     <div id="tip">Tip加载中...</div>
     <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
+    <details>
+        <summary>初次访问此站点，我该如何使用此站点？</summary>
+
+        可能会有一些很若只的问题出现，但是我确实需要编写这些以降低本站使用门槛
+
+        <details>
+            <summary>如何使用搜索框？</summary><p>
+            1. 在搜索框中输入您想搜索的项目名称或关键词<br/>
+            2. 选择您想搜索的项目分类，例如“反控软件”<br/>
+            3. 选择您想使用的匹配规则，例如“至少匹配一个”<br/>
+            4. 点击“搜索”按钮，即可看到符合条件的搜索结果<br/>
+            5. 点击搜索结果中的项目名称，即可访问该项目的官网或网盘分流下载页面<br/>
+            <br/>
+            注：按下 <kbd>Ctrl</kbd> 时点击所选分类可以多选分类 且 2、3条步骤并不是必须的
+            </p>
+        </details>
+
+        <details>
+            <summary>网盘提取码多少？</summary><p>
+            请仔细观察标题下方的正文格式的文段
+            </p>
+        </details>
+
+        <details>
+            <summary>为什么只有部分项目才有直链下载？</summary><p>
+                本站的原则是只为反控软件提供直链，用于降低反控软件的下载时间
+            </p>
+        </details>
+
+        <details>
+            <summary>为什么别人输一段网址就能直接下载而我需要查找软件并点击链接？</summary><p>
+                这是本站的“快速跳转”功能，请访问另外一篇帮助文档：“关于本站的快速跳转功能”
+            </p>
+        </details>
+    </details>
     <details>
         <summary>关于本站的网络线路信息</summary><p>
         本站同时部署了2个可见的静态页面托管服务与一个 境外TencentCDN服务，分别为：
