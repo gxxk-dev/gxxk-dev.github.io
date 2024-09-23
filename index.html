@@ -437,6 +437,7 @@
             "desc": [
                 "仓库github@BengbuGuards/MythwareToolkit(仍在持续更新) 针对极域开发",
                 "融合JiYuTrainer/MythwareToolkit 功能一应俱全",
+                "<del>NoTopDomain盒子 贼几把好用(电棍音)</del>"
             ],
             "type":["工具","反控软件"]
         },
@@ -532,7 +533,7 @@
         // 如果没有结果，显示提示信息
         if (results.length === 0) {
             const noResultsDiv = document.createElement("div");
-            noResultsDiv.innerHTML = "没有找到匹配的结果。";
+            noResultsDiv.innerHTML = "啥也没有www";
             noResultsDiv.style.textAlign = "center";
             projectDivContent.appendChild(noResultsDiv);
         }
@@ -546,7 +547,8 @@
         "站长是一名初二学生党，网页(除CSS)是纯手撸的，如有Bug多多包涵plz",
         "搜索框大小写不敏感 可输入全小写文字匹配大写字母",
         "可能宽屏看不出来 但是我给两个搜索框加了毛玻璃和阴影...",
-        "我在编写此页面时一般默认您具有基本的 互联网/Windows操作系统 知识"
+        "我在编写此页面时一般默认您具有基本的 互联网/Windows操作系统 知识",
+        "在DevTools中的 网络侧 勾选“禁用缓存” 可实时看见服务端网页(虽然你可能并不需要)"
     ];
 
     // 函数用于更新提示信息
@@ -630,9 +632,9 @@
         （首选 境外TencentCDN 请根据自己所在学校机房的网络情况选择使用）<br/>
         境外TencentCDN 线路为站长自行购买的腾讯CDN服务 为减少CDN服务带来的经济负担 CDN策略如下：
         <ol>
-            <li>站点页面的缓存通常为30min</li>
-            <li>直链下载/图片缓存4629天</li>
-            <li>每5min最高仅可用1GB(超限将关停CDN服务) </li>
+            <li>浏览器端 站点页面的缓存通常为30min</li>
+            <li>浏览器端 直链下载/图片缓存4629天</li>
+            <li>每5min CDN可用1GB(超限将关停CDN服务) </li>
             <li>禁止非国内IP访问</li>
         </ol></p>
     </details>
