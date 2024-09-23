@@ -239,7 +239,8 @@
         "zt": "https://ouyhq.lanzouv.com/iZZJ429foy6b",  // ZeroTier-One
         "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
         "kste06_green": "https://ouyhq.lanzouv.com/iCZ6Z29vvofi", // 金山打字(KingSoft-TypeEazy)2006绿色版
-        "g2k": "https://ouyhq.lanzouv.com/iWTnN29xstjg" // Glass2K
+        "g2k": "https://ouyhq.lanzouv.com/iWTnN29xstjg", // Glass2K
+        "ntd": "https://ouyhq.lanzouv.com/i3JW22apnn0j"
     };
     
     const directUrls ={ // 原则上讲 只会给以反控为主的项目提供下载用直链
@@ -248,6 +249,7 @@
         "jyt4xp":"./files/jyt4xp.exe",
         "jytp":"./files/jytp.exe",
         "mt":"./files/mt1.2.exe",
+        "ntd":"./files/ntdv3.exe",
 
         // 不涉及到站内下载的直链
         "kste10_game_gr":"http://wdl1.cache.wps.cn/dzt/game/dzt_great_race.exe", // 金山打字(KingSoft-TypeEazy)系列
@@ -256,17 +258,19 @@
         // 不涉及到下载的直链
         "cfwp": "https://proxy.frez79.site/",  // CFWorker-HTTPProxy
         "bms": "https://bemuse.ninja/",  // Bemuse
-        "imcre_game":"https://games.imc.re/", // IMCRE-Games
+        "imcre_game":"https://games.imc.re/", // IMCRE-游戏
         "thdl":"https://cloud.lilywhite.cc/"
     }
+
+
+
     try { // 自动跳转功能
         param=window.location.href.split("?")[1]
         data = panUrls[param]
         data2 = directUrls[param]
         if (data2!=undefined && window.location.href.split("?")[2]!="pu"){ // pu PanUrl的缩写
-            window.location.href = data2;
         }else if (data!=undefined){
-            window.location.href = data;
+            window.location.href = panUrls[param];
         }else if (param!=undefined){
             alert(`来来来你说说这个${window.location.href.split("?")[1]}是哪个软件的ID\n(未找到此ID对应的软件分流下载URL)`)
         }
@@ -281,6 +285,7 @@
     function Direct(id){
         return `<a href="${directUrls[id]}">直链下载</a>`
     }
+
     const index = { // 软件索引 包含标题与介绍
         "mcc": { // My Computer Class
             "title":[
@@ -293,7 +298,7 @@
                 "可解除存储/应用限制策略",
                 "总结：大小3.7m，是各种情况下的首选，功能强大全面但部分功能对于小白来讲不易用，可误操作空间小"
             ],
-            "type":["tools","antiCtrl",]
+            "type":["工具","反控软件",]
         },
         "jyt": { // JiYu Trainer
             "title":[
@@ -308,7 +313,7 @@
                 "JYTP非原作者所作 但可过大部分免杀 XP兼容性未知",
                 "总结：大小4.5m，新手+极域首选，操作简单，功能较全，可误操作空间大，官方文档很有用",
             ],
-            "type":["tools","antiCtrl",]
+            "type":["工具","反控软件",]
         },
         "7z": { // 7-zip
             "title":[
@@ -319,7 +324,7 @@
                 "高性能解压缩工具，支持多种压缩格式",
                 "轻量级，快速解压，冲浪必备",
             ],
-            "type":["tools",]
+            "type":["工具",]
         },
         "cfwp": { // CFWorker-HTTPProxy
             "title":[
@@ -329,7 +334,7 @@
                 "基于Cloudflare Workers搭建的HTTP代理服务",
                 "该Worker处于免费计费额度下 建议自行搭建"
             ],
-            "type":["tools","webpages",]
+            "type":["工具","网页",]
         },
         "mt": { // MythwareToolkit
             "title": [
@@ -344,7 +349,7 @@
                 "总结：不到1m大小，极域首选，操作简单，可误操作空间中等，涵盖了摸鱼必备的所有功能（除教师端UDP控制模拟）",
                 "64bit在文件夹内也有"
             ],
-            "type":["tools",]
+            "type":["工具","反控软件"]
         },
         "sw": { // ScreenWings
             "title": [
@@ -354,7 +359,7 @@
                 "不到1m大小，开启后教师端将展示为全屏黑屏",
                 "可和MythwareToolkit搭配使用"
             ],
-            "type":["tools","antiCtrl",]
+            "type":["工具","反控软件",]
         },
         "mlp": { // MoonlightPortable
             "title": [
@@ -365,7 +370,7 @@
                 "知名游戏串流工具，机房远程串流必备",
                 "需提前在被控端配置好Sunshine与虚拟显示器(推荐ParsecVDisplay)"
             ],
-            "type":["tools",]
+            "type":["工具",]
         },
         "zt": { // ZeroTier-One
             "title": [
@@ -375,7 +380,7 @@
             "desc": [
                 "虚拟局域网客户端 懂得都懂",
             ],
-            "type":["tools",]
+            "type":["工具",]
         },
         "bms": { // Bemuse
             "title": [
@@ -385,7 +390,7 @@
                 "在线BMS播放器，内置大量曲目",
                 "<del>那些敲来敲去的人还觉得自己很酷！</del>"
             ],
-            "type":["games","webpages"]
+            "type":["游戏","网页"]
         },
         "imcre_game": { // IMCRE Game
             "title": [
@@ -395,7 +400,7 @@
                 "在线小游戏集合 <del>果子大劲道口味正(bushi)</del>",
                 "IMC.RE 实力无需多言"
             ],
-            "type":["games","webpages"]
+            "type":["游戏","网页"]
         },
         "kste" : { // 金山打字
             "title": [
@@ -409,23 +414,46 @@
                 `（或可以尝试下载kste10_game1以补全运行库）`,
                 `kste06_green与kste10_game_gr均来源于52破解论坛:${A("https://www.52pojie.cn/thread-1730978-1-1.html")}`
             ],  
-            "type":["games","tools"]
+            "type":["游戏","工具"]
         },
         "thdl":{ // 东方Project资源下载站
             "title":
                 [`thdl|莉莉云(东方Project资源下载站): ${A(directUrls["thdl"])}`,],
             "desc":
                 [`最全面的THProject资源下载站`,],
-            "type":["webpages","tools"]
+            "type":["网页","工具"]
         },
         "g2k":{ // Glass2K
             "title":
                 [`g2k|[窗口透明化]Glass2K: ${pan("g2k")}`,],
             "desc":
                 [`一个轻量级的窗口透明化工具`,`摸鱼必备`],
-            "type":["tools"]
+            "type":["工具"]
+        },
+        "ntd": { // NoTopDomain
+            "title": [
+                `ntd|[反控]NoTopDomain v3: ${pan("ntd")} ${Direct("ntd")}`,
+            ],
+            "desc": [
+                "仓库github@BengbuGuards/MythwareToolkit(仍在持续更新) 针对极域开发",
+                "融合JiYuTrainer/MythwareToolkit 功能一应俱全",
+            ],
+            "type":["工具","反控软件"]
         },
     }
+
+    // 对于描述列表的 类型 显示 追加
+    for (const key in index) {
+        desc_typeText="类型：";
+        firstAddText=true;
+        console.log(key)
+        index[key]["type"].forEach(type=>{
+            console.log(type);
+            desc_typeText += ((firstAddText ? "" : ",") + type);
+            firstAddText=false;
+        });
+        index[key].desc.push(desc_typeText)
+    };
 
     function LoadContentBySearchText() {
         const searchBox = document.getElementById('search-box');
@@ -486,6 +514,7 @@
                 titleDiv.appendChild(title);
             });
             singleProjectDiv.appendChild(titleDiv);
+
             // 创建描述列表
             const descList = document.createElement('ul');
             project.desc.forEach(desc => {
@@ -495,6 +524,7 @@
                 descList.appendChild(listItem);
             });
             singleProjectDiv.appendChild(descList);
+
             // 添加到内容区域
             projectDivContent.appendChild(singleProjectDiv);
         });
@@ -508,14 +538,15 @@
         }
     }
     const tips = [
-        "本站建议以宽屏视图浏览",
+        "本站建议以 宽屏视图 Win/Edge 浏览",
         "补药盗刷站长的CDN啊www",
         "边按下Ctrl边选中分类可以多选分类",
         "在选中分类“所有项目”时 规则“反选”不会起任何作用",
         "是的我知道这坨JS是shi",
         "站长是一名初二学生党，网页(除CSS)是纯手撸的，如有Bug多多包涵plz",
         "搜索框大小写不敏感 可输入全小写文字匹配大写字母",
-        "可能宽屏看不出来 但是我给两个搜索框加了毛玻璃和阴影..."
+        "可能宽屏看不出来 但是我给两个搜索框加了毛玻璃和阴影...",
+        "我在编写此页面时一般默认您具有基本的 互联网/Windows操作系统 知识"
     ];
 
     // 函数用于更新提示信息
@@ -564,10 +595,10 @@
         <label>分类选择：</label><br/>
         <select id="category-select" multiple>
             <option value="all">所有项目</option>
-            <option value="antiCtrl">反控软件</option>
-            <option value="tools">工具</option>
-            <option value="games">游戏</option>
-            <option value="webpages">网页</option>
+            <option value="反控软件">反控软件</option>
+            <option value="工具">工具</option>
+            <option value="游戏">游戏</option>
+            <option value="网页">网页</option>
         </select><br/>  
         <label>分类匹配规则：</label><br/>
         <select id="filter-mode">
@@ -583,45 +614,10 @@
     <h1><a href="./">机房摸鱼之盾</a></h1>
     <hr />
     资源收录/纠错联系：<a href="mailto:gxxk@duck.com">gxxk@duck.com (点我发送)</a> <br/>
-    本站网页(与网页源代码)以 <a href="https://www.gnu.org/licenses/agpl.txt">AGPL v3+</a>协议 开源在 <a href="https://github.com/gxxk-dev/gxxk-dev.github.io">Gxxk的Github个人仓库</a> 下 <br />
     网盘主页面：<a href="https://ouyhq.lanzouv.com/b0w84ycpg">https://ouyhq.lanzouv.com/b0w84ycpg</a> 提取码：gxxk<br>
     点击名称可以访问此项目官网 冒号后的内容一般为 网盘分流下载页面/对应资源<br />
     <div id="tip">Tip加载中...</div>
-    <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开DevTools，仔细看看&lt;script&gt;标签内的内容吧</div>
-    <details>
-        <summary>初次访问此站点，我该如何使用此站点？</summary>
-
-        可能会有一些很若只的问题出现，但是我确实需要编写这些以降低本站使用门槛
-
-        <details>
-            <summary>如何使用搜索框？</summary><p>
-            1. 在搜索框中输入您想搜索的项目名称或关键词<br/>
-            2. 选择您想搜索的项目分类，例如“反控软件”<br/>
-            3. 选择您想使用的匹配规则，例如“至少匹配一个”<br/>
-            4. 点击“搜索”按钮，即可看到符合条件的搜索结果<br/>
-            5. 点击搜索结果中的项目名称，即可访问该项目的官网或网盘分流下载页面<br/>
-            <br/>
-            注：按下 <kbd>Ctrl</kbd> 时点击所选分类可以多选分类 且 2、3条步骤并不是必须的
-            </p>
-        </details>
-
-        <details>
-            <summary>网盘提取码多少？</summary><p>
-            请仔细观察标题下方的正文格式的文段
-            </p>
-        </details>
-
-        <details>
-            <summary>为什么只有部分项目才有直链下载？</summary><p>
-                本站的原则是只为反控软件提供直链，用于降低反控软件的下载时间
-            </p>
-        </details>
-
-        <details>
-            <summary>为什么别人输一段网址就能直接下载而我需要查找软件并点击链接？</summary><p>
-                这是本站的“快速跳转”功能，请访问另外一篇帮助文档：“关于本站的快速跳转功能”
-            </p>
-        </details>
+    <div style="color: #1e1e1e;font-size:50%" alt="不是哥们，你这都发现了？">Gxxk暗地里加了一堆奇怪的跳转规则，不妨打开Dev工具，仔细看看&lt;script&gt;标签内的内容吧</div>
     </details>
     <details>
         <summary>关于本站的网络线路信息</summary><p>
@@ -631,8 +627,16 @@
             <li><a href="https://cf.frez79.site/">Cloudflare Pages</a>（无页面更新延迟 少几率被墙 概率出现的人机验证会拖慢下载反控软件的时间）</li>
             <li><a href="https://v.frez79.site/">Vercel</a>（无页面更新延迟 速度与第一者持平 快但被墙几率大）</li>
         </ol>
-        （首选 境外TencentCDN 请根据自己所在学校机房的网络情况选择使用）<br/></p>
+        （首选 境外TencentCDN 请根据自己所在学校机房的网络情况选择使用）<br/>
+        境外TencentCDN 线路为站长自行购买的腾讯CDN服务 为减少CDN服务带来的经济负担 CDN策略如下：
+        <ol>
+            <li>站点页面的缓存通常为30min</li>
+            <li>直链下载/图片缓存4629天</li>
+            <li>每5min最高仅可用1GB(超限将关停CDN服务) </li>
+            <li>禁止非国内IP访问</li>
+        </ol></p>
     </details>
+
     <details>
         <summary>[碎碎念]关于本站的站点架构信息</summary><p>
         站点架构其实就是纯静态 <del>毕竟你也看得到嘛</del> <br/>
@@ -657,16 +661,23 @@
         ID位于标题起始处至字符<code>|</code>处，例如<code>CFWorker HTTP Proxy</code>的标题如下所示：<br/>
         <code>cfwp|CFWorker HTTP Proxy(x86):https://proxy.frez79.site/</code><br/>
         则开头的<code>cfwp</code>就是ID
+        
+        <details>
+            <summary>关于直链下载对快速跳转的影响</summary><p>
+            在对应项目含有直链时 快速跳转会默认跳转到直链链接进行下载 以便加快速度 提升体验 <br/>
+            您可以通过在原快速下载的URL后加上 <code>?pu</code> 以强制跳转到网盘链接<br/>
+            （PU：即PanUrl）<br/>
+            直链功能不会影响到其他项目，只有含有直链的项目才会跳转到直链链接<br/>
+            </p>
+        </details>
         </p>
     </details>
 
     <details>
-        <summary>关于直链下载对快速跳转的影响</summary><p>
-        在对应项目含有直链时 快速跳转会默认跳转到直链链接进行下载 以便加快速度 提升体验 <br/>
-        您可以通过在原快速下载的URL后加上 <code>?pu</code> 以强制跳转到网盘链接<br/>
-        （PU：即PanUrl）<br/>
-        直链功能不会影响到其他项目，只有含有直链的项目才会跳转到直链链接<br/>
-        </p>
+        <summary>关于本站的版权信息</summary><p>
+        页面由Gxxk(Frez79)编写 页面源码在AGPLv3+许可下开源在<a href="https://github.com/gxxk-dev/gxxk-dev.github.io">个人仓库</a><br/>
+        本站仅 分发/收录 某些特定的 可执行文件/项目 名称仅用于表示 不作任何暗示或明示 不对任何事物的完整性作担保.<br/>
+        页面编写者不是页面中被收录项目的作者 有关被收录项目的问题请询问原作者. </p>
     </details>
 
     
