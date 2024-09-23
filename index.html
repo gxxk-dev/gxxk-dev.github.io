@@ -447,9 +447,7 @@
     for (const key in index) {
         desc_typeText="类型：";
         firstAddText=true;
-        console.log(key)
         index[key]["type"].forEach(type=>{
-            console.log(type);
             desc_typeText += ((firstAddText ? "" : ",") + type);
             firstAddText=false;
         });
