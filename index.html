@@ -269,8 +269,9 @@
         data = panUrls[param]
         data2 = directUrls[param]
         if (data2!=undefined && window.location.href.split("?")[2]!="pu"){ // pu PanUrl的缩写
-        }else if (data!=undefined){
-            window.location.href = panUrls[param];
+            window.location.href = data2;
+        }else if (data!=undefined && data2==undefined){
+            window.location.href = data
         }else if (param!=undefined){
             alert(`来来来你说说这个${window.location.href.split("?")[1]}是哪个软件的ID\n(未找到此ID对应的软件分流下载URL)`)
         }
@@ -546,14 +547,17 @@
         "搜索框大小写不敏感 可输入全小写文字匹配大写字母",
         "可能宽屏看不出来 但是我给两个搜索框加了毛玻璃和阴影...",
         "我在编写此页面时一般默认您具有基本的 互联网/Windows操作系统 知识",
-        "在DevTools中的 网络侧 勾选“禁用缓存” 可实时看见服务端网页(虽然你可能并不需要)"
+        "在DevTools中的 网络侧 勾选“禁用缓存” 可实时看见服务端网页(虽然你可能并不需要)",
+        "你可以通过在DevTools-Console中执行\"tips\"以查看所有Tip",
+        "极域有个分支 叫“联想云教室” 我很需要这它 所以如果你它的安装包 那么请发给我 蟹蟹~",
+        "<a href=\"https://jiyukiller.github.io/\">jiyukiller.github.io</a>针对极域精选了三款反控软件 且提供多线路下载(多为Github镜像)"
     ];
 
     // 函数用于更新提示信息
     function updateTip() {
         const randomIndex = Math.floor(Math.random() * tips.length);
         const tip = tips[randomIndex];
-        document.getElementById('tip').innerText = `Tip: ${tip}`;
+        document.getElementById('tip').innerHTML = `Tip: ${tip}`;
     }
 
     function Autorun(){
@@ -564,8 +568,12 @@
 
         const filterModeSelect = document.getElementById('filter-mode');
         filterModeSelect.addEventListener('change', LoadContentBySearchText);
-
-        updateTip();
+        if (document.cookie!="firstVisit=1"){
+            document.getElementById('tip').innerHTML = `Tip内有时会藏一些好东西，浏览网页时记得多加留意哦~`;
+            document.cookie="firstVisit=1";
+        }else{
+            updateTip()
+        }
         setInterval(updateTip, 3000);
         LoadContentBySearchText();
     }
