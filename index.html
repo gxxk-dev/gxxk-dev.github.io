@@ -222,6 +222,10 @@
     #category-select:active, #filter-mode:active {
         box-shadow: 0 0 10px #7a7a7a, inset 0 1px 0 #606060;
     }
+
+    .highlight {
+        background-color: #eeee00;
+    }
 </style> <!-- CSS用KimiAI写的 有点奇奇怪怪的隐性Bug 等以后系统的学了CSS以后来修一修 -->
 <script>
     const panUrls = { //基于pan盘的URL
@@ -240,7 +244,9 @@
         "zt4w7": "https://ouyhq.lanzouv.com/i0iLN29foxkj",  // ZeroTier-One for win7
         "kste06_green": "https://ouyhq.lanzouv.com/iCZ6Z29vvofi", // 金山打字(KingSoft-TypeEazy)2006绿色版
         "g2k": "https://ouyhq.lanzouv.com/iWTnN29xstjg", // Glass2K
-        "ntd": "https://ouyhq.lanzouv.com/i3JW22apnn0j"
+        "ntd": "https://ouyhq.lanzouv.com/i3JW22apnn0j", // NoTopDomain
+        "ds_n16": "https://ouyhq.lanzouv.com/iMs9P2bc155c", // DevSideCar v1.8.6 node16
+        "ds_n17": "https://ouyhq.lanzouv.com/iucXm2bc0j8d", // DevSideCar v1.8.6 node17
     };
     
     const directUrls ={ // 原则上讲 只会给以反控为主的项目提供下载用直链
@@ -311,7 +317,7 @@
                 "仓库github@imengyu/JiYuTrainer(archive于21.12.03)，针对极域开发",
                 "支持学生端启停/卸载与广播窗口化，支持反监视/反控制",
                 "可模拟基于UDP的部分极域教师端控制操作 可解除网络访问限制策略",
-                "JYTP非原作者所作 但可过大部分免杀 XP兼容性未知",
+                "JYTP非原作者所作 但可过360免杀 XP兼容性未知",
                 "总结：大小4.5m，新手+极域首选，操作简单，功能较全，可误操作空间大，官方文档很有用",
             ],
             "type":["工具","反控软件",]
@@ -437,11 +443,24 @@
             ],
             "desc": [
                 "仓库github@BengbuGuards/MythwareToolkit(仍在持续更新) 针对极域开发",
-                "融合JiYuTrainer/MythwareToolkit 功能一应俱全",
+                "融合JiYuTrainer/MythwareToolkit 功能一应俱全 但易被杀",
                 "<del>NoTopDomain盒子 贼几把好用(电棍音)</del>"
             ],
             "type":["工具","反控软件"]
         },
+        "ds":{ // Dev-SideCar
+            "title":[
+                `ds_n16|Dev-SideCar v1.8.6 (node16): ${pan("ds_n16")}`,
+                `ds_n17|Dev-SideCar v1.8.6 (node17): ${pan("ds_n17")}`,
+            ],
+            "desc": [
+                "仓库 github@docmirror/dev-sidecar",
+                "在不翻越GFW的同时对Github等合法网站 访问加速/绕过封锁",
+                "本站部署了基于 CFWorker 的高级模式服务端 dsproxy.frez79.site"
+            ],
+            "type":["工具",]
+
+        }
     }
 
     // 对于描述列表的 类型 显示 追加
@@ -583,6 +602,20 @@
     }
 
     document.addEventListener("DOMContentLoaded", Autorun);
+    function HighlightSearchTerm() {
+        const searchBox = document.getElementById('search-box');
+        const query = searchBox.value.toLowerCase();
+        const projects = document.querySelectorAll('.searchable-desc');
+
+        projects.forEach(project => {
+            const text = project.textContent.toLowerCase();
+            if (text.includes(query)) {
+                project.innerHTML = text.replace(query, `<span class='highlight'>${query}</span>`);
+            } else {
+                project.innerHTML = text;
+            }
+        });
+    }
 
     function ToggleTitlesView() { // 标题/详细 视图切换
         var descElements = document.querySelectorAll('.searchable-desc');
@@ -598,7 +631,7 @@
 <div class="flex-container">
     <input type="text" id="search-box" placeholder="搜索项目... (留空以全部展示)"></input>
     <div class="button-container">
-        <button onclick="LoadContentBySearchText()">搜索</button>
+        <button onclick="LoadContentBySearchText();HighlightSearchTerm()">搜索</button>
         <button id="toggle-titles" onclick="ToggleTitlesView()">标题视图</button>
     </div>
 </div>
